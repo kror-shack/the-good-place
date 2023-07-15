@@ -1,0 +1,95 @@
+.Sidebar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 35px 28px 20px;
+  height: inherit;
+  width: 26.25rem;
+  background-color: white;
+  border: 1px solid white;
+  overflow-y: visible;
+  box-sizing: border-box;
+  color: rgb(0, 0, 0);
+  overflow: scroll;
+  left: 0;
+  animation: slideInFromLeft 0.5s forwards;
+  gap: 3rem;
+  z-index: 5;
+  height: 100vh;
+  box-shadow: -2px 0px 0.4rem rgba(0, 0, 0, 0.1);
+
+  svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    padding: 9rem 0.5rem 0rem;
+    align-items: flex-start;
+    gap: 1.5rem;
+    font-family: "Josefin-sans";
+    font-size: 1.3rem;
+
+    a {
+      text-decoration: none;
+      color: #000;
+      // font-family: ;
+      font-style: normal;
+      width: 100%;
+      padding-bottom: 0.2rem;
+      line-height: normal;
+      border-bottom: 1px solid rgb(172, 172, 172);
+
+      &:hover {
+        color: #a6796f;
+      }
+    }
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+
+    a {
+      text-decoration: none;
+      color: black;
+
+      &:hover {
+        color: #a6796f;
+      }
+    }
+
+    .screen-reader-text {
+      display: none;
+    }
+  }
+}
+
+.hide {
+  display: none;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutToLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.close {
+  animation: slideOutToLeft 0.5s forwards;
+}

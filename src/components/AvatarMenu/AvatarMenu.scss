@@ -1,0 +1,61 @@
+.Avatar-menu {
+  position: relative;
+  display: inline-block;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+  margin-top: 9rem;
+
+  .profile-details {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    .initials {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.8rem;
+    display: none;
+    font-size: 1.2rem;
+    border-radius: 4px;
+    min-width: 120px;
+
+    p {
+      margin-bottom: 0.8rem;
+    }
+
+    button {
+      display: block;
+      margin-bottom: 0.5rem;
+      background-color: #f0f0f0;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+    }
+  }
+
+  &:hover .dropdown-menu {
+    display: block;
+  }
+}
