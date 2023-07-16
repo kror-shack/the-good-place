@@ -1,32 +1,36 @@
-Josefin Sans Variable Font
-==========================
+Petrona Variable Font
+=====================
 
-This download contains Josefin Sans as both variable fonts and static fonts.
+This download contains Petrona as both variable fonts and static fonts.
 
-Josefin Sans is a variable font with this axis:
+Petrona is a variable font with this axis:
   wght
 
 This means all the styles are contained in these files:
-  JosefinSans-VariableFont_wght.ttf
-  JosefinSans-Italic-VariableFont_wght.ttf
+  Petrona-VariableFont_wght.ttf
+  Petrona-Italic-VariableFont_wght.ttf
 
 If your app fully supports variable fonts, you can now pick intermediate styles
 that aren’t available as static fonts. Not all apps support variable fonts, and
-in those cases you can use the static font files for Josefin Sans:
-  static/JosefinSans-Thin.ttf
-  static/JosefinSans-ExtraLight.ttf
-  static/JosefinSans-Light.ttf
-  static/JosefinSans-Regular.ttf
-  static/JosefinSans-Medium.ttf
-  static/JosefinSans-SemiBold.ttf
-  static/JosefinSans-Bold.ttf
-  static/JosefinSans-ThinItalic.ttf
-  static/JosefinSans-ExtraLightItalic.ttf
-  static/JosefinSans-LightItalic.ttf
-  static/JosefinSans-Italic.ttf
-  static/JosefinSans-MediumItalic.ttf
-  static/JosefinSans-SemiBoldItalic.ttf
-  static/JosefinSans-BoldItalic.ttf
+in those cases you can use the static font files for Petrona:
+  static/Petrona-Thin.ttf
+  static/Petrona-ExtraLight.ttf
+  static/Petrona-Light.ttf
+  static/Petrona-Regular.ttf
+  static/Petrona-Medium.ttf
+  static/Petrona-SemiBold.ttf
+  static/Petrona-Bold.ttf
+  static/Petrona-ExtraBold.ttf
+  static/Petrona-Black.ttf
+  static/Petrona-ThinItalic.ttf
+  static/Petrona-ExtraLightItalic.ttf
+  static/Petrona-LightItalic.ttf
+  static/Petrona-Italic.ttf
+  static/Petrona-MediumItalic.ttf
+  static/Petrona-SemiBoldItalic.ttf
+  static/Petrona-BoldItalic.ttf
+  static/Petrona-ExtraBoldItalic.ttf
+  static/Petrona-BlackItalic.ttf
 
 Get started
 -----------

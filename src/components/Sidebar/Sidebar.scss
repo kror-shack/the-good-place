@@ -2,7 +2,7 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  padding: 28px 35px 28px 20px;
+  padding: 0px 35px 28px 20px;
   height: inherit;
   width: 26.25rem;
   background-color: white;
@@ -14,6 +14,7 @@
   left: 0;
   animation: slideInFromLeft 0.5s forwards;
   gap: 3rem;
+  top: 0%;
   z-index: 5;
   height: 100vh;
   box-shadow: -2px 0px 0.4rem rgba(0, 0, 0, 0.1);
@@ -33,9 +34,9 @@
     font-size: 1.3rem;
 
     a {
+      justify-content: flex-start;
       text-decoration: none;
       color: #000;
-      // font-family: ;
       font-style: normal;
       width: 100%;
       padding-bottom: 0.2rem;

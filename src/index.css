@@ -25,3 +25,39 @@ code {
     url("./assets/fonts/static/JosefinSans-SemiBold.ttf") format("truetype");
   font-weight: bold;
 }
+
+@font-face {
+  font-family: "Poppins";
+  src: local("Poppins"),
+    url("./assets/fonts/Poppins-Medium.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Poppins-bold";
+  src: local("Poppins-bold"),
+    url("./assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Electrolize";
+  src: local("Electrolize"),
+    url("./assets/fonts/Electrolize-Regular.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Petrona-italic";
+  src: local("Petrona-italic"),
+    url("./assets/fonts/Petrona-Italic-VariableFont_wght.ttf")
+      format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Petrona";
+  src: local("Petrona"),
+    url("./assets/fonts/Petrona-VariableFont_wght.ttf") format("truetype");
+  font-weight: bold;
+}

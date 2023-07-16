@@ -14,6 +14,17 @@ header {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 10;
   height: 8rem;
+  background-color: white;
+
+  & > svg {
+    width: 22.875rem;
+    height: 6.375rem;
+
+    rect {
+      width: 22.875rem;
+      height: 6.375rem;
+    }
+  }
 
   a {
     text-decoration: none;
@@ -23,11 +34,10 @@ header {
     align-items: center;
   }
 
-  .header-left {
-    margin-left: 6rem;
+  .header-right {
     display: flex;
     width: 80%;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
   }
 
@@ -36,41 +46,14 @@ header {
     border: none;
   }
 
-  .menu-button {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .book-table-link {
-    width: 11.95569rem;
-    height: 1.75rem;
-    padding: 0.188rem 1.5rem;
-    border: 2px solid black;
-    font-family: "Josefin-sans-bold";
-    font-size: 0.8rem;
-    box-sizing: border-box;
-    transition: all 0.2s !important;
-    font-family: "Poppins";
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.09rem;
-
-    &:hover {
-      color: white;
-      background-color: #8fa2a0;
-      border: 1px solid white;
-    }
-  }
-
   .login-button {
-    width: 3.75rem;
-    height: 1.375rem;
-    border: 1px solid rgb(0, 0, 0, 0.38);
-    font-size: 0.8rem;
+    width: 5rem;
+    height: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.38);
+    font-size: 1rem;
     font-family: "Josefin-sans";
     cursor: pointer;
-    transition: all 0.2s !important;
+    transition: all 0.2s;
 
     &:hover {
       color: white;
