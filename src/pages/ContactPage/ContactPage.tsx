@@ -27,9 +27,8 @@ export const ContactPage = () => {
   return (
     <main className="Contact-page">
       <div className="content-container">
-        <h1>Contact Us</h1>
         <div>
-          <h3>Let's Get In Touch!</h3>
+          <h2>Let's Get In Touch!</h2>
           <p>
             Or reach us through our contact number:{" "}
             <a href="tel:+90535654688">+90535654688</a>{" "}
