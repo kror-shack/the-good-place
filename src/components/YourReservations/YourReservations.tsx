@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import app from "../../firebase";
 import { RootState } from "../../store/store";
 import { useCollection } from "react-firebase-hooks/firestore";
+import "./YourReservations.scss";
 
 type ReservationData = {
   name: string;
@@ -70,27 +71,35 @@ const YourReservations = () => {
     getYourReservations();
   }, []);
   return (
-    <div>
-      <p>
-        {value && (
-          <span>
-            Collection:{" "}
-            <div>
+    <main className="Your-reservations">
+      <div>
+        <h2>Reservations</h2>
+        {value ? (
+          <table>
+            <thead>
+              <tr>
+                <th>No. of Guests</th>
+                <th>Time</th>
+                <th>Date</th>
+                <th>Request</th>
+              </tr>
+            </thead>
+            <tbody>
               {value.map((item: any, index: number) => (
-                <div key={index}>
-                  <p>People: {item.people}</p>
-                  <p>Request: {item.request || "No request"}</p>
-                  <p>Time: {item.time || "No time selected"}</p>
-                  <p>Email: {item.email}</p>
-                  <p>Name: {item.name}</p>
-                  <p>Number: {item.number || "No number provided"}</p>
-                </div>
+                <tr className="reservation" key={index}>
+                  <td>{item.people}</td>
+                  <td>{item.time}</td>
+                  <td>{item.date}</td>
+                  <td>{item.request || "none"}</td>
+                </tr>
               ))}
-            </div>
-          </span>
+            </tbody>
+          </table>
+        ) : (
+          <h3>Loading...</h3>
         )}
-      </p>
-    </div>
+      </div>
+    </main>
   );
 };
 

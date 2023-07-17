@@ -1,0 +1,56 @@
+.Your-reservations {
+  margin-top: 8rem;
+  font-family: "Poppins";
+  height: 78vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    font-family: "Petrona-italic";
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    text-align: center;
+    font-family: "Petrona-italic";
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reservation {
+    display: flex;
+    border: 1px solid black;
+  }
+
+  table {
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    width: 70rem;
+
+    tr {
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    th {
+      font-family: "Poppins-bold";
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+
+      width: 8rem;
+    }
+  }
+}
