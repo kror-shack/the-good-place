@@ -46,7 +46,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
         <Link onClick={closeSidebar} to="/">
           Reservation
         </Link>
-        <Link onClick={closeSidebar} to="/">
+        <Link onClick={closeSidebar} to="/contactPage">
           Contact
         </Link>
         <Link onClick={closeSidebar} to="/faqPage">

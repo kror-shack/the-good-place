@@ -10,6 +10,7 @@ import Header from "./components/Header/Header";
 import OrderDashboard from "./components/OrderDashboard/OrderDashboard";
 import Sidebar from "./components/Sidebar/Sidebar";
 import YourReservations from "./components/YourReservations/YourReservations";
+import ContactPage from "./pages/ContactPage/ContactPage";
 import FAQPage from "./pages/FaqPage/FaqPage";
 import MainPage from "./pages/MainPage/MainPage";
 import store from "./store/store";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/orderDashboard" element={<OrderDashboard />} />
           <Route path="/checkoutPage" element={<CheckoutPage />} />
           <Route path="/faqPage" element={<FAQPage />} />
+          <Route path="/contactPage" element={<ContactPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
