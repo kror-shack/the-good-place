@@ -13,6 +13,7 @@ import YourReservations from "./components/YourReservations/YourReservations";
 import ContactPage from "./pages/ContactPage/ContactPage";
 import FAQPage from "./pages/FaqPage/FaqPage";
 import MainPage from "./pages/MainPage/MainPage";
+import ReviewPage from "./pages/ReviewPage/ReviewPage";
 import store from "./store/store";
 function App() {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
@@ -31,6 +32,7 @@ function App() {
           <Route path="/checkoutPage" element={<CheckoutPage />} />
           <Route path="/faqPage" element={<FAQPage />} />
           <Route path="/contactPage" element={<ContactPage />} />
+          <Route path="/reviewPage" element={<ReviewPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
