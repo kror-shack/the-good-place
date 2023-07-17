@@ -56,6 +56,7 @@ const BookTable = () => {
       email: user.email,
       name: user.displayName,
       time: time,
+      date: selectedDate,
       people: people,
       uid: user.uid,
       number: optionalNumber,
