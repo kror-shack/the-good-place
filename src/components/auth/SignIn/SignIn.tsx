@@ -6,7 +6,12 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import React, { ReactComponentElement, useEffect, useState } from "react";
+import React, {
+  ReactComponentElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
@@ -19,6 +24,8 @@ import app, { auth } from "../../../firebase";
 import { AppDispatch } from "../../../store/store";
 import "./SignIn.scss";
 
+import { ReactComponent as GoogleIcon } from "../../../assets/svgs/google.svg";
+
 interface User {
   uid: string | null;
   email: string | null;
@@ -29,12 +36,18 @@ interface User {
 }
 
 const SignIn = () => {
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-  const [signInWithEmailAndPassword, userP, loadingP, errorP] =
-    useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle, userFromGoogle, loadingFromGoogle, errorFromGoogle] =
+    useSignInWithGoogle(auth);
+  const [
+    signInWithEmailAndPassword,
+    userFromEmail,
+    loadingFromEmail,
+    errorFromEmail,
+  ] = useSignInWithEmailAndPassword(auth);
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const [isAdmin, setIsAdmin] = useState(false);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const [formState, setFormState] = useState({
     email: "",
@@ -77,26 +90,26 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    if (!userP && user) {
-      checkIfUserIsAdmin(user.user.uid);
+    if (!userFromEmail && userFromGoogle) {
+      checkIfUserIsAdmin(userFromGoogle.user.uid);
       console.log("returning");
       const userData: User = {
-        displayName: user.user.displayName,
-        uid: user.user.uid,
-        email: user.user.email,
-        photoURL: user.user.photoURL,
+        displayName: userFromGoogle.user.displayName,
+        uid: userFromGoogle.user.uid,
+        email: userFromGoogle.user.email,
+        photoURL: userFromGoogle.user.photoURL,
       };
       console.log("dispatching");
       dispatch(loginUser(userData));
 
       navigate("/");
-    } else if (userP && !user) {
-      checkIfUserIsAdmin(userP.user.uid);
+    } else if (userFromEmail && !userFromGoogle) {
+      checkIfUserIsAdmin(userFromEmail.user.uid);
 
       const userData: Partial<User> = {
-        displayName: userP.user.displayName,
-        uid: userP.user.uid,
-        email: userP.user.email,
+        displayName: userFromEmail.user.displayName,
+        uid: userFromEmail.user.uid,
+        email: userFromEmail.user.email,
       };
 
       console.log("dispatching");
@@ -104,50 +117,63 @@ const SignIn = () => {
 
       navigate("/");
     }
-  }, [user, userP]);
+  }, [userFromGoogle, userFromEmail]);
 
   return (
-    <main>
-      <form role="form" onSubmit={(e) => handleSubmit(e)}>
-        <div className="field field_v1">
-          <label htmlFor="email" className="screen-reader-label">
-            Email or Username
-          </label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            className="field__input"
-            placeholder="chidiAnagonye@gmail.com"
-            value={formState.email}
-            onChange={handleChange}
-          />
-          <span className="field__label-wrap" aria-hidden="true">
-            <span className="field__label">Email</span>
-          </span>
+    <main className="SignIn">
+      <div>
+        <h2>Weclome</h2>
+        <div>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div className="input-container">
+              <div>
+                <label htmlFor="email">Email or Username</label>
+                <input
+                  ref={emailRef}
+                  type="text"
+                  id="email"
+                  name="email"
+                  className="input"
+                  placeholder="Email"
+                  value={formState.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className="screen-reader-label">
+                  Password
+                </label>
+                <input
+                  ref={passwordRef}
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="input"
+                  placeholder="Password"
+                  value={formState.password}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <button type="submit">LOGIN </button>
+          </form>
+          <Link className="forgot-password" to="/">
+            Forgotten password?
+          </Link>
+          <div className="or-line-container">
+            <div></div>
+            <p>or</p>
+            <div></div>
+          </div>
         </div>
-        <div className="field field_v2">
-          <label htmlFor="password" className="screen-reader-label">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="field__input"
-            placeholder="password"
-            value={formState.password}
-            onChange={handleChange}
-          />
-          <span className="field__label-wrap" aria-hidden="true">
-            <span className="field__label">Password</span>
-          </span>
-        </div>
-        <button type="submit">login</button>
-      </form>
-      <Link to="/">Forgotten password?</Link>
-      <Link to="/signUp">Create new account</Link>
-      <button onClick={signInFromGoogle}>Login With Google</button>
+        <button className="google-login" onClick={signInFromGoogle}>
+          <GoogleIcon />
+          <p> Sign in with google</p>
+        </button>
+        <Link className="new-account" to="/signUp">
+          Create new account
+        </Link>
+      </div>
     </main>
   );
 };

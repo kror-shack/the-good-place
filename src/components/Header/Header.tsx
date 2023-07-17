@@ -27,8 +27,11 @@ const Header = ({ showSidebar, setShowSidebar }: Props) => {
 
   return (
     <header>
-      <HamburgerMenu setShowSidebar={setShowSidebar} />
-      <Sidebar showSidebar={showSidebar} />
+      <HamburgerMenu
+        showSidebar={showSidebar}
+        setShowSidebar={setShowSidebar}
+      />
+      <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
 
       <MainLogo />
       <div className="header-right">

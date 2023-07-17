@@ -11,6 +11,7 @@ footer {
   flex-direction: column;
   font-family: "Josefin-sans";
   height: 2rem;
+  z-index: 2;
 
   & > div:first-child {
     width: 90%;

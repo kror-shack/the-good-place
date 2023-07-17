@@ -8,6 +8,10 @@ import { AppDispatch, RootState } from "../../store/store";
 import fetchRandomImage from "../../utils/fetchRandomImage";
 import getInitials from "../../utils/getInitials";
 import "./AvatarMenu.scss";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import LogoutIcon from "@mui/icons-material/Logout";
+import EventNoteIcon from "@mui/icons-material/EventNote";
+import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 
 interface User {
   uid: string;
@@ -58,16 +62,26 @@ const AvatarMenu = () => {
       <div className="profile-details">
         <img src={userPhotoUrl} alt="" />
         {user.isAdmin ? <p>Admin</p> : <p className="initials">{initials}</p>}
+        <ArrowDropDownIcon />
       </div>
       <div className="dropdown-menu">
         <p className="display-name">
           {user.isAdmin ? "Admin" : user.displayName}
         </p>
-        <Link to="/yourReservations">
-          {user.isAdmin ? "Reservations" : "Your Reservations"}
-        </Link>
-        <button>Previous Orders</button>
-        <button onClick={signOutUser}>Sign Out</button>
+        <div>
+          <EventNoteIcon />
+          <Link to="/yourReservations">
+            {user.isAdmin ? "Reservations" : "Your Reservations"}
+          </Link>
+        </div>
+        <div>
+          <DeliveryDiningIcon />
+          <Link to="/"> Previous Orders</Link>
+        </div>
+        <div className="sign-out-container">
+          <button onClick={signOutUser}>Log Out</button>
+          <LogoutIcon />
+        </div>
       </div>
     </div>
   );

@@ -7,15 +7,20 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 
 type Props = {
   showSidebar: boolean;
+  setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Sidebar = ({ showSidebar }: Props) => {
+const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
   const [componentHasMounted, setComponentHasMounted] = useState(false);
 
   useEffect(() => {
     //to prevent it on running on first load
     if (showSidebar) setComponentHasMounted(true);
   }, [showSidebar]);
+
+  function closeSidebar() {
+    setShowSidebar((prev) => !prev);
+  }
   return (
     <aside
       className={
@@ -23,15 +28,33 @@ const Sidebar = ({ showSidebar }: Props) => {
       }
     >
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/">Menu</Link>
-        <Link to="/orderDashboard">Order</Link>
-        <Link to="/">About</Link>
-        <Link to="/">Events</Link>
-        <Link to="/">Reservation</Link>
-        <Link to="/">Contact</Link>
-        <Link to="/">FAQ</Link>
-        <Link to="/">Reviews</Link>
+        <Link to="/" onClick={closeSidebar}>
+          Home
+        </Link>
+        <Link onClick={closeSidebar} to="/">
+          Menu
+        </Link>
+        <Link onClick={closeSidebar} to="/orderDashboard">
+          Order
+        </Link>
+        <Link onClick={closeSidebar} to="/">
+          About
+        </Link>
+        <Link onClick={closeSidebar} to="/">
+          Events
+        </Link>
+        <Link onClick={closeSidebar} to="/">
+          Reservation
+        </Link>
+        <Link onClick={closeSidebar} to="/">
+          Contact
+        </Link>
+        <Link onClick={closeSidebar} to="/faqPage">
+          FAQ
+        </Link>
+        <Link onClick={closeSidebar} to="/">
+          Reviews
+        </Link>
       </nav>
       <ul>
         <li>

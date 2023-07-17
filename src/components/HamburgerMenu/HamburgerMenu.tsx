@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./HamburgerMenu.scss";
 
 type Props = {
+  showSidebar: boolean;
   setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const HamburgerMenu = ({ setShowSidebar }: Props) => {
+const HamburgerMenu = ({ showSidebar, setShowSidebar }: Props) => {
   const [sidebarShown, setSidebarShown] = useState(false);
   function openSidebar() {
     setShowSidebar((prev) => !prev);
     setSidebarShown((prev) => !prev);
   }
+
+  useEffect(() => {
+    if (!showSidebar) setSidebarShown(false);
+  }, [showSidebar]);
 
   return (
     <div className="HamburgerMenu">

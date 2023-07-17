@@ -1,0 +1,88 @@
+$primaryColor: black;
+$secondaryColor: #333;
+$hoverColor: #ffc107;
+$animationDuration: 0.5s;
+
+.FaqPage {
+  margin-top: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  font-family: "Poppins";
+
+  h3 {
+    margin: 0px;
+    font-size: 1.5rem;
+    color: rgb(35, 82, 124);
+
+    &:hover {
+      color: #0000ff8f;
+      text-decoration: underline;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    li {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 2rem;
+      svg {
+        height: 1rem;
+
+        width: 1rem;
+      }
+    }
+  }
+
+  .svg-container {
+    margin-top: 0.8rem;
+    display: flex;
+    align-items: center;
+  }
+
+  & > div {
+    padding: 0px 5%;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .container {
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  h1 {
+    text-align: center;
+    margin-top: 1rem;
+    color: $primaryColor;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+  }
+
+  .question {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: $primaryColor;
+    cursor: pointer;
+    transition: color $animationDuration ease-in-out;
+    &:hover {
+      color: $hoverColor;
+    }
+  }
+
+  .answer {
+    font-size: 0.8rem;
+    padding-left: 1rem;
+    margin-top: 1rem;
+  }
+}

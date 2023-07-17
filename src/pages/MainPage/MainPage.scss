@@ -84,6 +84,7 @@
         align-items: center;
         border: 1px solid black;
         margin-top: 3rem;
+        transition: all 0.2s;
 
         &:hover {
           color: white;
@@ -129,7 +130,7 @@
 
     & > p:last-of-type {
       width: 38.6875rem;
-      margin-top: 0px;
+      margin: 0px;
     }
   }
 
@@ -373,7 +374,7 @@
     font-family: "Josefin-sans-bold";
     font-size: 0.8rem;
     box-sizing: border-box;
-    transition: all 0.2s !important;
+    transition: all 0.2s;
     font-family: "Poppins";
     font-size: 0.75rem;
     font-weight: 800;
