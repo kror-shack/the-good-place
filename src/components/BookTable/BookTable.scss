@@ -16,7 +16,7 @@
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 2.25rem;
     letter-spacing: 0.4rem;
     text-align: center;
     width: 100%;
@@ -56,9 +56,10 @@
     padding-left: 10rem;
 
     textarea {
-      width: 30.8125rem;
+      width: 38.8125rem;
       height: 4.875rem;
-      padding: 4px 4px 0 8px;
+      padding: 1rem;
+      font-size: 1.2rem;
 
       border: 1px solid #919191;
 
@@ -75,7 +76,7 @@
       width: 9.9375rem;
       height: 2.8125rem;
       font-family: "Petrona-italic";
-      font-size: 1.1rem;
+      font-size: 1.4rem;
       font-style: normal;
       font-weight: 500;
       line-height: normal;
@@ -104,6 +105,7 @@
       input {
         width: 1rem;
         height: 1rem;
+        font-size: 1.2rem;
       }
     }
 
@@ -111,15 +113,17 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      font-size: 1.2rem;
     }
 
     input {
-      width: 21.75rem;
-      height: 2.1875rem;
+      width: 23.75rem;
+      height: 3rem;
       padding: 4px 4px 0 8px;
       border: 1px solid #919191;
       background: transparent;
       color: black;
+      font-size: 1.2rem;
 
       &:focus {
         outline: none;
@@ -129,56 +133,8 @@
 
     fieldset {
       width: 42.75rem;
+      font-size: 1.2rem;
       height: 3rem;
     }
   }
-
-  // p {
-  //   margin-bottom: 1rem;
-  //   font-size: 1.2rem;
-  // }
-
-  // form {
-  //   display: grid;
-  //   grid-template-columns: 1fr;
-  //   grid-gap: 1rem;
-
-  //   label {
-  //     font-weight: bold;
-  //   }
-
-  //   input[type="number"],
-  //   textarea {
-  //     width: 20%;
-  //     padding: 0.5rem;
-  //     font-size: 1rem;
-  //     border: 1px solid #ccc;
-  //     border-radius: 4px;
-  //   }
-
-  //   textarea {
-  //     resize: vertical;
-  //     height: 120px;
-  //   }
-
-  //   fieldset {
-  //     border: none;
-  //     padding: 0;
-  //     margin: 0;
-
-  //     legend {
-  //       font-weight: bold;
-  //       margin-bottom: 0.5rem;
-  //     }
-
-  //     label {
-  //       display: block;
-  //       margin-bottom: 0.5rem;
-
-  //       input[type="radio"] {
-  //         margin-right: 0.5rem;
-  //       }
-  //     }
-  //   }
-  // }
 }

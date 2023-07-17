@@ -8,6 +8,7 @@ import { ReactComponent as PartySvg } from "../../assets/svgs/party.svg";
 import { ReactComponent as PetsSvg } from "../../assets/svgs/pets.svg";
 
 import React, { useState } from "react";
+import DisplayReviews from "../../components/DisplayReviews/DisplayReviews";
 
 const MainPage = () => {
   const [email, setEmail] = useState("");
@@ -132,6 +133,7 @@ const MainPage = () => {
           <p className="service-description">For Your Furry Companions</p>
         </div>
       </div>
+      <DisplayReviews />
     </main>
   );
 };

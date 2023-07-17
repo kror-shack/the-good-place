@@ -20,8 +20,8 @@
   box-shadow: -2px 0px 0.4rem rgba(0, 0, 0, 0.1);
 
   svg {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 2rem;
+    width: 2rem;
   }
 
   nav {
@@ -29,9 +29,8 @@
     flex-direction: column;
     padding: 9rem 0.5rem 0rem;
     align-items: flex-start;
-    gap: 1.5rem;
+    gap: 2rem;
     font-family: "Josefin-sans";
-    font-size: 1.3rem;
 
     a {
       justify-content: flex-start;
@@ -40,6 +39,7 @@
       font-style: normal;
       width: 100%;
       padding-bottom: 0.2rem;
+      font-size: 1.6rem;
       line-height: normal;
       border-bottom: 1px solid rgb(172, 172, 172);
 

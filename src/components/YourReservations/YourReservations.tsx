@@ -20,11 +20,12 @@ type ReservationData = {
   request: number;
   email: string;
   number: number;
+  date: string;
 };
 
 const YourReservations = () => {
   const user = useSelector((state: RootState) => state.rootReducer.user);
-  const [value, setValue] = useState<any>();
+  const [value, setValue] = useState<Partial<ReservationData>[]>();
 
   const firestore = getFirestore(app);
 
@@ -85,7 +86,7 @@ const YourReservations = () => {
               </tr>
             </thead>
             <tbody>
-              {value.map((item: any, index: number) => (
+              {value.map((item: Partial<ReservationData>, index: number) => (
                 <tr className="reservation" key={index}>
                   <td>{item.people}</td>
                   <td>{item.time}</td>

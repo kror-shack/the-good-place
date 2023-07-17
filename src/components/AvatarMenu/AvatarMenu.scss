@@ -35,15 +35,15 @@
     top: 100%;
     right: 0;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
     padding: 0px 0.5rem 0.8rem;
     display: none;
-    font-size: 0.8rem;
+    font-size: 1rem;
     border-radius: 4px;
-    min-width: 10rem;
+    min-width: 13rem;
     border: 1px solid black;
-    height: 8rem;
-    gap: 9px;
+    height: 11rem;
+    gap: 15px;
 
     div {
       display: flex;
@@ -72,6 +72,7 @@
       border-radius: 4px;
       cursor: pointer;
       display: flex;
+      font-size: 1rem;
       color: #f44336;
 
       &:hover {

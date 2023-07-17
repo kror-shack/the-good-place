@@ -7,15 +7,18 @@
 
   div {
     height: 100%;
+    margin-bottom: 2rem;
   }
 
   p {
-    font-size: 0.8rem;
+    font-size: 1rem;
     padding-left: 2rem;
+    margin-bottom: 5rem;
   }
-  h1 {
+  h2 {
     text-align: center;
     margin-bottom: 0px;
+    font-size: 2rem;
   }
 
   .content-container {
@@ -61,18 +64,19 @@
     }
 
     button[type="submit"] {
-      padding: 6px 21px;
+      padding: 6px 30px;
       background-color: #8fa2a0;
       color: #fff;
-      width: 5rem;
+      width: 7.5rem;
+      font-size: 1.5rem;
 
       border-radius: 4px;
       cursor: pointer;
     }
 
     input {
-      width: 21.75rem;
-      height: 2.1875rem;
+      width: 24.75rem;
+      height: 3.1875rem;
       padding: 4px 4px 0 8px;
       border: 1px solid #919191;
       background: transparent;
@@ -89,8 +93,8 @@
     }
 
     textarea {
-      width: 47.8125rem;
-      height: 8.875rem;
+      width: 52.8125rem;
+      height: 10.875rem;
       padding: 4px 4px 0 8px;
 
       border: 1px solid #919191;

@@ -63,6 +63,7 @@ const SignUp = () => {
   return (
     <main className="SignUp">
       <div>
+        <h2>Create Your Account</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="input-container">
             <label htmlFor="firstName" className="screen-reader-label">
