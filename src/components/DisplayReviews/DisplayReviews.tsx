@@ -1,19 +1,8 @@
-import {
-  collection,
-  Firestore,
-  getDocs,
-  getFirestore,
-  query,
-  where,
-} from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import app from "../../firebase";
-import { RootState } from "../../store/store";
-import { useCollection } from "react-firebase-hooks/firestore";
 import "./DisplayReviews.scss";
 import { Link } from "react-router-dom";
 import StarRate from "@mui/icons-material/StarRate";
+import { getReviews } from "../../utils/services/getReviews";
 type ReviewData = {
   author: string;
   date: string;
@@ -24,30 +13,15 @@ type ReviewData = {
 };
 
 const DisplayReviews = () => {
-  const [value, setValue] = useState<Partial<ReviewData>[]>([]);
+  const [reviews, setReviews] = useState<Partial<ReviewData>[]>();
 
-  const firestore = getFirestore(app);
-
-  async function getReviews() {
-    const reviewRef = await collection(firestore, "reviews");
-    const reviewList: Partial<ReviewData>[] = [];
-    getDocs(reviewRef)
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          console.log(doc.data());
-          reviewList.push({ ...doc.data() });
-        });
-        setValue(reviewList);
-        console.log(value);
-      })
-
-      .catch((err) => {
-        console.log(err);
-      });
+  async function fetchReviews() {
+    const reviewList = await getReviews();
+    setReviews(reviewList.slice(0, 3));
   }
 
   useEffect(() => {
-    getReviews();
+    if (!reviews) fetchReviews();
   }, []);
 
   return (
@@ -62,8 +36,8 @@ const DisplayReviews = () => {
         </p>
       </div>
       <div className="review-container">
-        {value &&
-          value.map((review: Partial<ReviewData>, index: number) => (
+        {reviews &&
+          reviews.map((review: Partial<ReviewData>, index: number) => (
             <div className="review" key={index}>
               <div className={review.stars}>
                 <StarRate />

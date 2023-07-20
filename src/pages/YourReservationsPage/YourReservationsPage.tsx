@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import app from "../../firebase";
 import { RootState } from "../../store/store";
-import "./YourReservations.scss";
+import "./YourReservationsPage.scss";
 import { ReservationData } from "../../types/types";
 import { getUserResevations } from "../../utils/services/getUserResevations";
 
-const YourReservations = () => {
+const YourReservationsPage = () => {
   const user = useSelector((state: RootState) => state.rootReducer.user);
   const [reservations, setReservations] =
     useState<Partial<ReservationData>[]>();
@@ -66,4 +66,4 @@ const YourReservations = () => {
   );
 };
 
-export default YourReservations;
+export default YourReservationsPage;

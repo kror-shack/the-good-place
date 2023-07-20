@@ -1,42 +1,38 @@
 import { useEffect, useState } from "react";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../../features/userSlice";
 import { auth } from "../../firebase";
 import { AppDispatch, RootState } from "../../store/store";
-import fetchRandomImage from "../../utils/fetchRandomImage";
-import getInitials from "../../utils/getInitials";
 import "./AvatarMenu.scss";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import LogoutIcon from "@mui/icons-material/Logout";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
+import { User } from "../../types/types";
+import fetchRandomImage from "../../utils/services/fetchRandomImage";
+import getInitials from "../../utils/helperFunctions/getInitials";
 
-interface User {
+export interface loggedUser
+  extends Omit<User, "uid" | "email" | "displayName" | "userName"> {
   uid: string;
   email: string;
-  photoURL?: string;
   displayName: string;
-  isAdmin: boolean;
 }
 
 const AvatarMenu = () => {
-  const user: User = useSelector((state: RootState) => state.rootReducer.user);
+  const user: loggedUser = useSelector(
+    (state: RootState) => state.rootReducer.user
+  );
   const dispatch: AppDispatch = useDispatch();
   const [userPhotoUrl, setUserPhotoUrl] = useState<string>(
     "https://unsplash.com/photos/kTqx1Y48WOs"
   );
   const initials = getInitials(user.displayName);
+  const navigate = useNavigate();
 
   const [signOut, loading, error] = useSignOut(auth);
-
-  const withSignOut = async () => {
-    console.log("sogninhout");
-    await signOut();
-    console.log("i did my waiting");
-    dispatch(logoutUser());
-  };
 
   async function setRandomImage() {
     const randomImg = await fetchRandomImage();
@@ -47,6 +43,7 @@ const AvatarMenu = () => {
   async function signOutUser() {
     await signOut();
     dispatch(logoutUser());
+    navigate("/");
   }
 
   useEffect(() => {
@@ -70,7 +67,7 @@ const AvatarMenu = () => {
         </p>
         <div>
           <EventNoteIcon />
-          <Link to="/yourReservations">
+          <Link to="/YourReservationsPage">
             {user.isAdmin ? "Reservations" : "Your Reservations"}
           </Link>
         </div>

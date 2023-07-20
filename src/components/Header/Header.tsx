@@ -35,11 +35,10 @@ const Header = ({ showSidebar, setShowSidebar }: Props) => {
 
       <MainLogo />
       <div className="header-right">
-        {/* <div className="header-left"> */}
         {user && user.email ? (
           <AvatarMenu />
         ) : (
-          <Link to="/signIn" className="login-button">
+          <Link to="/SignInPage" className="login-button">
             Login
           </Link>
         )}

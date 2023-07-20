@@ -1,4 +1,4 @@
-const faqData = [
+const faqs = [
   {
     question: "Are reservations required?",
     answer:
@@ -100,4 +100,4 @@ const faqData = [
   },
 ];
 
-export default faqData;
+export default faqs;

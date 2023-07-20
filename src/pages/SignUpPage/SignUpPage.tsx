@@ -6,20 +6,14 @@ import {
 } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../../../features/userSlice";
-import { auth } from "../../../firebase";
-import { AppDispatch } from "../../../store/store";
-import "./SignUp.scss";
+import { loginUser } from "../../features/userSlice";
+import { auth } from "../../firebase";
+import { AppDispatch } from "../../store/store";
+import { SignUpForm } from "../../types/types";
+import "./SignUpPage.scss";
 
-const SignUp = () => {
-  const [formState, setFormState] = useState({
-    email: "",
-    password: "",
-    username: "",
-    phoneNumber: "",
-    firstName: "",
-    lastName: "",
-  });
+const SignUpPage = () => {
+  const [formState, setFormState] = useState<Partial<SignUpForm>>();
   const navigate = useNavigate();
 
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -37,19 +31,29 @@ const SignUp = () => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("before signing up");
-    console.log(formState.email);
-    console.log(formState.password);
+    console.log("int ht ehandle submit");
+    console.log(formState);
+    if (
+      !formState?.email ||
+      !formState.password ||
+      !formState.firstName ||
+      !formState.lastName
+    ) {
+      console.log("something is missng");
+
+      return;
+    }
     await createUserWithEmailAndPassword(formState.email, formState.password);
-    console.log("after signing up");
   }
 
   async function updateUserProfile() {
+    if (!formState?.firstName || !formState?.lastName) return;
     const displayName = `${formState.firstName} ${formState.lastName}`;
     await updateProfile({ displayName });
   }
   useEffect(() => {
     if (!user) return;
+    if (!formState) return;
     const userData: Partial<User> = {
       displayName: `${formState.firstName} ${formState.lastName}`,
       uid: user.user.uid,
@@ -75,7 +79,7 @@ const SignUp = () => {
               name="firstName"
               className="input"
               placeholder="Name"
-              value={formState.firstName}
+              value={formState?.firstName}
               onChange={handleChange}
             />
           </div>
@@ -89,7 +93,7 @@ const SignUp = () => {
               name="lastName"
               className="input"
               placeholder="Last Name"
-              value={formState.lastName}
+              value={formState?.lastName}
               onChange={handleChange}
             />
           </div>
@@ -103,7 +107,7 @@ const SignUp = () => {
               name="email"
               className="input"
               placeholder="Email"
-              value={formState.email}
+              value={formState?.email}
               onChange={handleChange}
             />
           </div>
@@ -117,18 +121,18 @@ const SignUp = () => {
               name="password"
               className="input"
               placeholder="Password"
-              value={formState.password}
+              value={formState?.password}
               onChange={handleChange}
             />
           </div>
           <button type="submit">Sign Up</button>
         </form>
         <div className="login">
-          <p>Already have an account?</p> <Link to="/signIn"> Login</Link>
+          <p>Already have an account?</p> <Link to="/SignInPage"> Login</Link>
         </div>
       </div>
     </main>
   );
 };
 
-export default SignUp;
+export default SignUpPage;

@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import "./BookTable.scss";
 import "firebase/firestore";
-import { addDoc, Firestore } from "firebase/firestore";
-import { getFirestore, collection } from "firebase/firestore";
+
 import app from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
+import { addReservation } from "../../utils/services/addReservation";
 
 const BookTable = () => {
   const user = useSelector((state: RootState) => state.rootReducer.user);
@@ -49,31 +49,19 @@ const BookTable = () => {
     setSelectedDate(e);
   };
 
-  const firestore = getFirestore(app);
-  const addReservation = async () => {
-    const reservationsRef = await collection(firestore, "reservations");
-    const doc = {
-      email: user.email,
-      name: user.displayName,
-      time: time,
-      date: selectedDate,
-      people: people,
-      uid: user.uid,
-      number: optionalNumber,
-      request: specialRequest,
-    };
-    try {
-      await addDoc(reservationsRef, doc);
-      console.log("added");
-      navigate("/");
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
-  };
-
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    addReservation();
+    const reservationMade = await addReservation(
+      user.email,
+      user.displayName,
+      time,
+      selectedDate,
+      people,
+      user.uid,
+      optionalNumber,
+      specialRequest
+    );
+    if (reservationMade) navigate("/");
   }
 
   return (
@@ -186,7 +174,7 @@ const BookTable = () => {
             {!user.displayName && (
               <div className="login-warning">
                 <p>Please sign in to continue!</p>{" "}
-                <Link to="/signIn">Login</Link>
+                <Link to="/SignInPage">Login</Link>
               </div>
             )}
             <button disabled={!user.email} type="submit">

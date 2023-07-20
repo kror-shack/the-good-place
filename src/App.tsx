@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignIn from "./components/auth/SignIn/SignIn";
-import SignUp from "./components/auth/SignUp/SignUp";
+import SignInPage from "./pages/SignInPage/SignInPage";
 import BookTable from "./components/BookTable/BookTable";
-import CheckoutPage from "./components/Checkout/Checkout";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import OrderDashboard from "./components/OrderDashboard/OrderDashboard";
-import Sidebar from "./components/Sidebar/Sidebar";
-import YourReservations from "./components/YourReservations/YourReservations";
+import OrderDashboard from "./pages/OrderDashboard/OrderDashboard";
 import ContactPage from "./pages/ContactPage/ContactPage";
 import FAQPage from "./pages/FaqPage/FaqPage";
 import MainPage from "./pages/MainPage/MainPage";
 import ReviewPage from "./pages/ReviewPage/ReviewPage";
 import store from "./store/store";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import YourReservationsPage from "./pages/YourReservationsPage/YourReservationsPage";
+import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 function App() {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
@@ -24,10 +23,13 @@ function App() {
         <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/signIn" element={<SignIn />} />
-          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/SignInPage" element={<SignInPage />} />
+          <Route path="/SignUpPage" element={<SignUpPage />} />
           <Route path="/bookTable" element={<BookTable />} />
-          <Route path="/yourReservations" element={<YourReservations />} />
+          <Route
+            path="/YourReservationsPage"
+            element={<YourReservationsPage />}
+          />
           <Route path="/orderDashboard" element={<OrderDashboard />} />
           <Route path="/checkoutPage" element={<CheckoutPage />} />
           <Route path="/faqPage" element={<FAQPage />} />

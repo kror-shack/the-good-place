@@ -1,9 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../firebase";
-
-export const provider = new GoogleAuthProvider();
 
 interface User {
   uid: string | null;
@@ -13,12 +9,6 @@ interface User {
   userName?: string;
   isAdmin: boolean;
 }
-
-type Action = {
-  payload: string;
-};
-
-type Builder = typeof ActionReducerMapBuilder;
 
 const initialState: User = {
   uid: null,

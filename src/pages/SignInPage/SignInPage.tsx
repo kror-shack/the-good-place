@@ -1,11 +1,3 @@
-import {
-  collection,
-  getDoc,
-  getDocs,
-  getFirestore,
-  query,
-  where,
-} from "firebase/firestore";
 import React, {
   ReactComponentElement,
   useEffect,
@@ -16,24 +8,16 @@ import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import { useDocument } from "react-firebase-hooks/firestore";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser, setAdmin } from "../../../features/userSlice";
-import app, { auth } from "../../../firebase";
-import { AppDispatch } from "../../../store/store";
-import "./SignIn.scss";
-
-import { ReactComponent as GoogleIcon } from "../../../assets/svgs/google.svg";
-
-interface User {
-  uid: string | null;
-  email: string | null;
-  photoURL: string | null;
-  displayName: string | null;
-  userName?: string;
-  admin?: boolean;
-}
+import { loginUser, setAdmin } from "../../features/userSlice";
+import app, { auth } from "../../firebase";
+import { AppDispatch } from "../../store/store";
+import "./SignInPage.scss";
+import { ReactComponent as GoogleIcon } from "../../assets/svgs/google.svg";
+import { User } from "../../types/types";
+import { checkIfUserIsAdmin } from "../../utils/auth/checkIfUserIsAdmin";
+import { getUserData } from "../../utils/auth/getUserData";
 
 const SignIn = () => {
   const [signInWithGoogle, userFromGoogle, loadingFromGoogle, errorFromGoogle] =
@@ -61,60 +45,38 @@ const SignIn = () => {
       [name]: value,
     }));
   };
-  const firestore = getFirestore(app);
 
-  async function checkIfUserIsAdmin(uid: string) {
-    const reservationsRef = await collection(firestore, "admin");
-    const q = query(reservationsRef, where("uid", "==", uid));
-    try {
-      const docsJson = await getDocs(q);
-
-      console.log("there are the json docs");
-      console.log(docsJson);
-      if (docsJson.docs.length > 0) {
-        dispatch(setAdmin());
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     await signInWithEmailAndPassword(formState.email, formState.password);
   }
 
   const signInFromGoogle = async () => {
-    console.log("trying to sign in");
     await signInWithGoogle();
-    console.log("signed in");
   };
+
+  async function googleSignIn() {
+    if (!userFromGoogle) return;
+    const isAdmin = await checkIfUserIsAdmin(userFromGoogle.user.uid);
+    if (isAdmin) dispatch(setAdmin());
+    const userData: Partial<User> = getUserData(userFromGoogle);
+    dispatch(loginUser(userData));
+  }
+
+  async function emailSignIn() {
+    if (!userFromEmail) return;
+    const isAdmin = await checkIfUserIsAdmin(userFromEmail.user.uid);
+    if (isAdmin) dispatch(setAdmin());
+    const userData: Partial<User> = getUserData(userFromEmail);
+    dispatch(loginUser(userData));
+  }
 
   useEffect(() => {
     if (!userFromEmail && userFromGoogle) {
-      checkIfUserIsAdmin(userFromGoogle.user.uid);
-      console.log("returning");
-      const userData: User = {
-        displayName: userFromGoogle.user.displayName,
-        uid: userFromGoogle.user.uid,
-        email: userFromGoogle.user.email,
-        photoURL: userFromGoogle.user.photoURL,
-      };
-      console.log("dispatching");
-      dispatch(loginUser(userData));
-
+      googleSignIn();
       navigate("/");
     } else if (userFromEmail && !userFromGoogle) {
-      checkIfUserIsAdmin(userFromEmail.user.uid);
-
-      const userData: Partial<User> = {
-        displayName: userFromEmail.user.displayName,
-        uid: userFromEmail.user.uid,
-        email: userFromEmail.user.email,
-      };
-
-      console.log("dispatching");
-      dispatch(loginUser(userData));
-
+      emailSignIn();
       navigate("/");
     }
   }, [userFromGoogle, userFromEmail]);
@@ -170,7 +132,7 @@ const SignIn = () => {
           <GoogleIcon />
           <p> Sign in with google</p>
         </button>
-        <Link className="new-account" to="/signUp">
+        <Link className="new-account" to="/signUpPage">
           Create new account
         </Link>
       </div>

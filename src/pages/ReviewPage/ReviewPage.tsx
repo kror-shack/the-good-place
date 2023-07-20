@@ -1,11 +1,3 @@
-import {
-  collection,
-  Firestore,
-  getDocs,
-  getFirestore,
-  query,
-  where,
-} from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import app from "../../firebase";
@@ -14,43 +6,23 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import "./ReviewPage.scss";
 import StarRate from "@mui/icons-material/StarRate";
 import ReviewInputForm from "../../components/ReviewInputForm/ReviewInputForm";
-
-type ReviewData = {
-  author: string;
-  date: string;
-  content: string;
-  header: string;
-  authorPhotoUrl: string;
-  stars: string;
-};
+import { getReviews } from "../../utils/services/getReviews";
+import { ReviewData } from "../../types/types";
 
 const ReviewPage = () => {
-  const [value, setValue] = useState<Partial<ReviewData>[]>([]);
+  const [reviews, setReviews] = useState<Partial<ReviewData>[]>();
   const [showReviewForm, setShowReviewForm] = useState(false);
 
-  const firestore = getFirestore(app);
-
-  async function getReviews() {
-    const reviewRef = await collection(firestore, "reviews");
-    const reviewList: Partial<ReviewData>[] = [];
-    getDocs(reviewRef)
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          console.log(doc.data());
-          reviewList.push({ ...doc.data() });
-        });
-        setValue(reviewList);
-        console.log(value);
-        console.log(reviewList);
-      })
-
-      .catch((err) => {
-        console.log(err);
-      });
+  async function updateReviews() {
+    console.log("updating reveiws");
+    const fetchedReviews = await getReviews();
+    if (fetchedReviews) {
+      setReviews(fetchedReviews);
+    }
   }
 
   useEffect(() => {
-    getReviews();
+    if (!reviews) updateReviews();
   }, []);
 
   return (
@@ -66,8 +38,8 @@ const ReviewPage = () => {
       </div>
 
       <ul>
-        {value &&
-          value.map((review: Partial<ReviewData>, index: number) => (
+        {reviews &&
+          reviews.map((review: Partial<ReviewData>, index: number) => (
             <li className="review" key={index}>
               <div className={review.stars}>
                 <StarRate />
