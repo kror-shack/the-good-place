@@ -13,6 +13,7 @@ import { RootState } from "../../store/store";
 import { useCollection } from "react-firebase-hooks/firestore";
 import "./ReviewPage.scss";
 import StarRate from "@mui/icons-material/StarRate";
+import ReviewInputForm from "../../components/ReviewInputForm/ReviewInputForm";
 
 type ReviewData = {
   author: string;
@@ -25,27 +26,9 @@ type ReviewData = {
 
 const ReviewPage = () => {
   const [value, setValue] = useState<Partial<ReviewData>[]>([]);
+  const [showReviewForm, setShowReviewForm] = useState(false);
 
   const firestore = getFirestore(app);
-
-  function convertTimestampToDateString({
-    seconds,
-    nanoseconds,
-  }: {
-    seconds: number;
-    nanoseconds: number;
-  }): string {
-    const milliseconds = seconds * 1000 + Math.floor(nanoseconds / 1e6);
-    const date = new Date();
-    date.setTime(milliseconds);
-
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear() % 100;
-
-    const formattedDate = `${day}-${month}-${year}`;
-    return formattedDate;
-  }
 
   async function getReviews() {
     const reviewRef = await collection(firestore, "reviews");
@@ -72,7 +55,16 @@ const ReviewPage = () => {
 
   return (
     <main className="Review-page">
-      <h2>Reviews</h2>
+      <div className="header-container">
+        <h2>Reviews</h2>
+        <div>
+          <button onClick={() => setShowReviewForm((prev) => !prev)}>
+            Add review
+          </button>
+          {showReviewForm && <ReviewInputForm />}
+        </div>
+      </div>
+
       <ul>
         {value &&
           value.map((review: Partial<ReviewData>, index: number) => (
@@ -100,7 +92,6 @@ const ReviewPage = () => {
             </li>
           ))}
       </ul>
-      <button>Add review</button>
     </main>
   );
 };

@@ -15,16 +15,55 @@
     justify-content: center;
     align-items: center;
     margin: 0;
+
     padding: 0;
 
     li {
-      max-width: 30rem;
+      width: 75rem;
+
       height: 20rem;
     }
   }
 
+  .header-container {
+    display: flex;
+    flex-direction: column;
+
+    & > div {
+      display: flex;
+      justify-content: flex-end;
+      width: 80%;
+    }
+  }
+
+  button {
+    width: 9.95569rem;
+    height: 2.5rem;
+    padding: 0.188rem 1.5rem;
+    border: 2px solid black;
+    font-family: "Josefin-sans-bold";
+    font-size: 0.8rem;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    font-family: "Poppins";
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.09rem;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      color: white;
+      background-color: #5d5289;
+      border: 1px solid white;
+    }
+  }
+
   .review {
-    max-width: 75rem;
+    width: 75rem;
     padding: 2rem;
     padding-bottom: 0;
     box-sizing: border-box;

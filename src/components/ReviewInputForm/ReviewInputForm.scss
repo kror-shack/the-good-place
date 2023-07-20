@@ -1,0 +1,29 @@
+.Review-form {
+  position: absolute;
+  width: 28rem;
+  height: 20rem;
+  background-color: white;
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
+  label {
+    display: none;
+  }
+
+  #stars {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+  }
+
+  input {
+    padding: 5px;
+  }
+  button {
+    width: 10rem;
+  }
+}
