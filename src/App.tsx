@@ -14,6 +14,7 @@ import store from "./store/store";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import YourReservationsPage from "./pages/YourReservationsPage/YourReservationsPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import MenuPage from "./pages/MenuPage/MenuPage";
 function App() {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/faqPage" element={<FAQPage />} />
           <Route path="/contactPage" element={<ContactPage />} />
           <Route path="/reviewPage" element={<ReviewPage />} />
+          <Route path="/menuPage" element={<MenuPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>

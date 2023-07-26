@@ -31,7 +31,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
         <Link to="/" onClick={closeSidebar}>
           Home
         </Link>
-        <Link onClick={closeSidebar} to="/">
+        <Link onClick={closeSidebar} to="/menuPage">
           Menu
         </Link>
         <Link onClick={closeSidebar} to="/orderDashboard">

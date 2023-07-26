@@ -1,0 +1,134 @@
+.Menu-page {
+  display: flex;
+  margin-top: 9rem;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Poppins";
+  margin-bottom: 2rem;
+  h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .subheader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 12rem;
+    margin-bottom: 2rem;
+
+    .button-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      button {
+        font-family: "Poppins-bold";
+        font-size: 1.2rem;
+        background: transparent;
+        cursor: pointer;
+        border: 0;
+
+        &:hover {
+          font-family: "Poppins-bold-italic";
+        }
+      }
+
+      .selected-button {
+        color: #ea4335;
+        font-family: "Poppins-bold-italic";
+      }
+    }
+  }
+
+  .line {
+    width: 0.1875rem;
+    height: 2.12869rem;
+    background: #000;
+  }
+
+  .menu-container {
+    border: 1px solid black;
+    width: 66.125rem;
+    height: 52.625rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Poppins";
+    padding: 1rem;
+
+    svg {
+      width: 13.875rem;
+      height: 4rem;
+
+      rect {
+        width: 20.875rem;
+        height: 6rem;
+      }
+    }
+
+    h2 {
+      font-family: "Petrona-bold";
+      border-bottom: 1px solid black;
+      margin-bottom: 1.5rem;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      max-width: 1200px;
+    }
+
+    .description {
+      font-family: "Poppins-light-italic";
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+
+    .menu-section {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .food-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .food-list li {
+      margin-bottom: 15px;
+    }
+
+    .item-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+    }
+
+    .price {
+      font-weight: bold;
+    }
+  }
+
+  .drinks-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    row-gap: 3rem;
+
+    .menu-section {
+      max-width: 28rem;
+    }
+  }
+}

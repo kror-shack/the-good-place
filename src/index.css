@@ -41,6 +41,13 @@ code {
 }
 
 @font-face {
+  font-family: "Poppins-bold-italic";
+  src: local("Poppins-bold-italic"),
+    url("./assets/fonts/Poppins-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
   font-family: "Electrolize";
   src: local("Electrolize"),
     url("./assets/fonts/Electrolize-Regular.ttf") format("truetype");
@@ -59,5 +66,12 @@ code {
   font-family: "Petrona";
   src: local("Petrona"),
     url("./assets/fonts/Petrona-VariableFont_wght.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Poppins-light-italic";
+  src: local("Poppins-light-italic"),
+    url("./assets/fonts/Poppins-ExtraLightItalic.ttf") format("truetype");
   font-weight: bold;
 }
