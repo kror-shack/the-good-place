@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
+import { AddressData } from "../types/types";
 
 interface User {
   uid: string | null;
@@ -8,6 +9,10 @@ interface User {
   displayName: string | null;
   userName?: string;
   isAdmin: boolean;
+  address: AddressData | null;
+  phoneNumber: number | string | null;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 const initialState: User = {
@@ -16,6 +21,10 @@ const initialState: User = {
   photoURL: null,
   displayName: null,
   isAdmin: false,
+  address: null,
+  phoneNumber: null,
+  firstName: null,
+  lastName: null,
 };
 
 const userSlice = createSlice({
@@ -28,6 +37,36 @@ const userSlice = createSlice({
     ) => {
       state.userName = action.payload.userName;
     },
+    updateFirstName: (state: User, action: { payload: string }) => {
+      state.firstName = action.payload;
+      console.log(state.firstName);
+    },
+    updateLastName: (state: User, action: { payload: string }) => {
+      state.lastName = action.payload;
+    },
+    updatePhoneNumber: (state: User, action: { payload: string | number }) => {
+      state.phoneNumber = action.payload;
+    },
+    updateAddress: (
+      state: User,
+      action: {
+        payload: {
+          addressLineOne: string;
+          district: string;
+          city: string;
+          addressLineTwo: string;
+        };
+      }
+    ) => {
+      const { addressLineOne, district, city, addressLineTwo } = action.payload;
+      state.address = {
+        addressLineOne,
+        district,
+        city,
+        addressLineTwo,
+      };
+    },
+
     loginUserWithEmail: (state: Partial<User>, action: { payload: User }) => {
       console.log("succeeded");
       console.log(action);
@@ -63,6 +102,10 @@ export const {
   loginUser,
   logoutUser,
   loginUserWithEmail,
+  updateFirstName,
+  updateLastName,
+  updatePhoneNumber,
+  updateAddress,
 } = userSlice.actions;
 
 export default userSlice.reducer;

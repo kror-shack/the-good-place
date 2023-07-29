@@ -35,7 +35,9 @@ const cartSlice = createSlice({
       console.log(action);
       const newItem = action.payload;
       console.log(newItem);
-      const existingItem = state.items.find((item) => item.id === newItem.id);
+      const existingItem = state.items.find(
+        (item) => item.name === newItem.name
+      );
 
       if (existingItem) {
         existingItem.quantity += newItem.quantity;
@@ -45,7 +47,7 @@ const cartSlice = createSlice({
     },
     increaseQuantity: (state: CartState, action: { payload: string }) => {
       const itemId = action.payload;
-      const item = state.items.find((item) => item.id === itemId);
+      const item = state.items.find((item) => item.name === itemId);
 
       if (item) {
         item.quantity += 1;
@@ -53,15 +55,22 @@ const cartSlice = createSlice({
     },
     decreaseQuantity: (state: CartState, action: { payload: string }) => {
       const itemId = action.payload;
-      const item = state.items.find((item) => item.id === itemId);
+      const item = state.items.find((item) => item.name === itemId);
 
       if (item && item.quantity > 1) {
         item.quantity -= 1;
+      } else if (item && item.quantity === 1) {
+        const itemId = action.payload;
+        const itemIndex = state.items.findIndex((item) => item.name === itemId);
+
+        if (itemIndex !== -1) {
+          state.items.splice(itemIndex, 1);
+        }
       }
     },
     deleteItem: (state: CartState, action: { payload: string }) => {
       const itemId = action.payload;
-      const itemIndex = state.items.findIndex((item) => item.id === itemId);
+      const itemIndex = state.items.findIndex((item) => item.name === itemId);
 
       if (itemIndex !== -1) {
         state.items.splice(itemIndex, 1);
