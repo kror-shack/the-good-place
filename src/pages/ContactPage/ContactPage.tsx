@@ -1,7 +1,13 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import "./ContactPage.scss";
+import { Typography, Container, TextField, Button } from "@mui/material";
 
+const styles = {
+  input: {
+    maxWidth: "24rem",
+  },
+};
 export const ContactPage = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
@@ -26,30 +32,48 @@ export const ContactPage = () => {
 
   return (
     <main className="Contact-page">
-      <div className="content-container">
+      <Container maxWidth="lg" className="content-container">
         <div>
-          <h2>Let's Get In Touch!</h2>
-          <p>
+          <Typography variant="h2">Let's Get In Touch!</Typography>
+          <Typography variant="body1">
             Or reach us through our contact number:{" "}
             <a href="tel:+90535654688">+90535654688</a>{" "}
-          </p>
+          </Typography>
         </div>
         <form ref={formRef} onSubmit={sendEmail}>
-          <label>
-            Name
-            <input type="text" name="user_name" />
-          </label>
-          <label>
-            Email
-            <input type="email" name="user_email" />
-          </label>
-          <label>
-            Message
-            <textarea name="message" />
-          </label>
-          <button type="submit">Send</button>
+          <div className="input-container">
+            <TextField
+              label="Name"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              name="user_name"
+              sx={styles.input}
+            />
+            <TextField
+              label="Email"
+              variant="outlined"
+              margin="normal"
+              type="email"
+              fullWidth
+              name="user_email"
+              sx={styles.input}
+            />
+          </div>
+          <TextField
+            label="Message"
+            variant="outlined"
+            fullWidth
+            multiline
+            rows={4}
+            margin="normal"
+            name="message"
+          />
+          <Button variant="contained" color="primary" type="submit">
+            Send
+          </Button>
         </form>
-      </div>
+      </Container>
     </main>
   );
 };

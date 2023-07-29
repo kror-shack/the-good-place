@@ -34,6 +34,13 @@ code {
 }
 
 @font-face {
+  font-family: "Poppins-light";
+  src: local("Poppins-light"),
+    url("./assets/fonts/Poppins-Light.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
   font-family: "Poppins-bold";
   src: local("Poppins-bold"),
     url("./assets/fonts/Poppins-SemiBold.ttf") format("truetype");
@@ -73,5 +80,26 @@ code {
   font-family: "Poppins-light-italic";
   src: local("Poppins-light-italic"),
     url("./assets/fonts/Poppins-ExtraLightItalic.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Crimson";
+  src: local("Crimson"),
+    url("./assets/fonts/CrimsonText-Regular.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Crimson-semibold";
+  src: local("Crimson-semibold"),
+    url("./assets/fonts/CrimsonText-SemiBold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Crimson-bold";
+  src: local("Crimson-bold"),
+    url("./assets/fonts/CrimsonText-Bold.ttf") format("truetype");
   font-weight: bold;
 }

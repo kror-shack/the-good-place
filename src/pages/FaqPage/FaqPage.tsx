@@ -1,13 +1,35 @@
 import React, { useState } from "react";
-import "./FaqPage.scss";
+import {
+  Typography,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+} from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import faqs from "./Faqs";
+import "./FaqPage.scss";
 
 interface FaqItem {
   question: string;
   answer: string;
 }
 
+const styles = {
+  h2: {
+    fontSize: "2rem",
+    textAlign: "center",
+    fontWeight: 900,
+    marginBottom: "1rem",
+  },
+  questions: {
+    fontSize: "1.8rem",
+  },
+  answers: {
+    padding: "1.1rem",
+  },
+};
 function FaqPage() {
   const faqData: FaqItem[] = faqs;
   const [visibleAnswers, setVisibleAnswers] = useState<boolean[]>([]);
@@ -21,22 +43,33 @@ function FaqPage() {
   return (
     <main className="FaqPage">
       <div>
-        <h1>Frequently Asked Questions</h1>
-        <ul>
+        <Typography sx={styles.h2} variant="h2">
+          Frequently Asked Questions
+        </Typography>
+        <List>
           {faqData.map((faqItem: FaqItem, index: number) => (
-            <li key={index}>
-              <CircleIcon />
-              <div className="container">
-                <h3 onClick={() => toggleAnswerVisibility(index)}>
-                  {faqItem.question}
-                </h3>
-                {visibleAnswers[index] && (
-                  <p className="answer">{faqItem.answer}</p>
-                )}
-              </div>
-            </li>
+            <React.Fragment key={index}>
+              <ListItem button onClick={() => toggleAnswerVisibility(index)}>
+                <ListItemIcon>
+                  <CircleIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={faqItem.question}
+                  style={{ fontSize: "1.4rem" }}
+                />
+              </ListItem>
+              <Collapse in={visibleAnswers[index]}>
+                <Typography
+                  sx={styles.answers}
+                  variant="body1"
+                  className="answer"
+                >
+                  {faqItem.answer}
+                </Typography>
+              </Collapse>
+            </React.Fragment>
           ))}
-        </ul>
+        </List>
       </div>
     </main>
   );

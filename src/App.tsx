@@ -15,6 +15,7 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import YourReservationsPage from "./pages/YourReservationsPage/YourReservationsPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import MenuPage from "./pages/MenuPage/MenuPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 function App() {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
@@ -37,8 +38,9 @@ function App() {
           <Route path="/contactPage" element={<ContactPage />} />
           <Route path="/reviewPage" element={<ReviewPage />} />
           <Route path="/menuPage" element={<MenuPage />} />
+          <Route path="/profilePage" element={<ProfilePage />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </Provider>
   );

@@ -1,5 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { ReactComponent as MainLogo } from "../../assets/svgs/header-logo.svg";
+
+import {
+  Grid,
+  Paper,
+  Tabs,
+  Tab,
+  Typography,
+  Container,
+  Stack,
+  Divider,
+} from "@mui/material";
 import "./MenuPage.scss";
 
 interface FoodItem {
@@ -244,50 +255,81 @@ const MenuPage = () => {
   }
 
   return (
-    <div className="Menu-page">
-      <h2>Menu</h2>
-      <div className="subheader">
-        <div className="line"></div>
-        <div className="button-container">
-          <button
-            className={showFoodMenu ? "selected-button" : ""}
-            onClick={handleFoodClick}
-          >
-            Food
-          </button>
-          <button
-            className={showFoodMenu ? " " : "selected-button"}
-            onClick={handleDrinkClick}
-          >
-            Drinks
-          </button>
-        </div>
+    <Container
+      className="Menu-page"
+      component="main"
+      maxWidth="lg"
+      sx={{ border: "1px solid #222", padding: "0rem 0.5rem" }}
+    >
+      <Typography variant="h4">Menu</Typography>
+      <div className="vertical-line-container">
+        <div className="vertical-line" />
       </div>
+      <Tabs
+        value={showFoodMenu ? 0 : 1}
+        onChange={(event, newValue) =>
+          newValue === 0 ? handleFoodClick() : handleDrinkClick()
+        }
+        centered
+      >
+        <Tab label="Food" />
+        <Tab label="Drinks" />
+      </Tabs>
       <div className="menu-container">
-        <MainLogo />
-
-        <div className={showFoodMenu ? "menu" : "drinks-menu"}>
+        <Grid container spacing={2}>
           {Object.entries(menu).map(([heading, items]) => (
-            <div key={heading} className="menu-section">
-              <h2>{heading}</h2>
-              <ul className="food-list">
-                {items.map((item) => (
-                  <li key={item.name}>
-                    <div className="item-title">
-                      <h3>{item.name}</h3>
-                      <p className="price">${item.price.toFixed(2)}</p>
-                    </div>
-                    {item.description && (
-                      <p className="description">{item.description}</p>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <Grid item xs={12} sm={6} md={showFoodMenu ? 4 : 6} key={heading}>
+              <Paper>
+                <Typography
+                  sx={{ fontFamily: "Poppins", marginTop: "0.5rem" }}
+                  variant="h5"
+                  align="center"
+                >
+                  {heading}
+                </Typography>
+                <ul>
+                  {items.map((item) => (
+                    <li key={item.name}>
+                      <Stack
+                        direction="row"
+                        sx={{
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                        spacing={2}
+                      >
+                        <Typography
+                          sx={{ fontFamily: "Poppins" }}
+                          variant="subtitle1"
+                        >
+                          {item.name}
+                        </Typography>
+                        <Typography
+                          sx={{ fontFamily: "Poppins" }}
+                          variant="body2"
+                          gutterBottom
+                        >
+                          ${item.price.toFixed(2)}
+                        </Typography>
+                      </Stack>
+                      {item.description && (
+                        <Typography
+                          sx={{ fontFamily: "Poppins-light-italic" }}
+                          variant="body2"
+                        >
+                          {item.description}
+                        </Typography>
+                      )}
+                      <Divider />
+                    </li>
+                  ))}
+                </ul>
+              </Paper>
+            </Grid>
           ))}
-        </div>
+        </Grid>
       </div>
-    </div>
+    </Container>
   );
 };
 

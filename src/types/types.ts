@@ -21,7 +21,7 @@ export type ReviewData = {
   content: string;
   header: string;
   authorPhotoUrl: string;
-  stars: string;
+  stars: number;
 };
 
 export type ReservationData = {
@@ -32,4 +32,11 @@ export type ReservationData = {
   email: string;
   number: number;
   date: string;
+};
+
+export type AddressData = {
+  addressLineOne: string;
+  district: string;
+  city: string;
+  addressLineTwo: string;
 };

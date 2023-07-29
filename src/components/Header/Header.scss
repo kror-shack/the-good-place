@@ -1,64 +1,25 @@
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding: 1rem;
-  font-family: "Josefin-sans";
-  box-sizing: border-box;
-  border: 1px solid white;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  height: 7rem;
-  background-color: white;
+.header {
+  .main-icon {
+    @media (max-width: 700px) {
+      /* Even smaller size for screens up to 480px width (e.g., mobile devices) */
+      width: 6rem;
+      height: 4.5rem;
 
-  & > svg {
-    width: 20.875rem;
-    height: 6rem;
-
-    rect {
-      width: 20.875rem;
-      height: 6rem;
+      rect {
+        width: 6rem;
+        height: 5rem;
+      }
     }
-  }
 
-  a {
-    text-decoration: none;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    @media (max-width: 500px) {
+      /* Even smaller size for screens up to 480px width (e.g., mobile devices) */
+      width: 4rem;
+      height: 3rem;
 
-  .header-right {
-    display: flex;
-    width: 80%;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  button {
-    background: transparent;
-    border: none;
-  }
-
-  .login-button {
-    width: 6rem;
-    height: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.38);
-    font-size: 1.25rem;
-    font-family: "Josefin-sans";
-    cursor: pointer;
-    transition: all 0.2s;
-
-    &:hover {
-      color: white;
-      background-color: #8fa2a0;
-      border: 1px solid white;
+      rect {
+        width: 4.5rem;
+        height: 5rem;
+      }
     }
   }
 }

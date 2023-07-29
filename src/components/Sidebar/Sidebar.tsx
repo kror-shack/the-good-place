@@ -4,10 +4,40 @@ import "./Sidebar.scss";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import Stack from "@mui/material/Stack";
+
+import {
+  SwipeableDrawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Drawer,
+  Button,
+} from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import InfoIcon from "@mui/icons-material/Info";
+import EventIcon from "@mui/icons-material/Event";
+import BookIcon from "@mui/icons-material/Book";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import HelpIcon from "@mui/icons-material/Help";
+import RateReviewIcon from "@mui/icons-material/RateReview";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 type Props = {
   showSidebar: boolean;
   setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const styles = {
+  list: {
+    marginTop: "6rem",
+    "@media (max-width: 500px)": {
+      marginTop: "3rem",
+    },
+  },
 };
 
 const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
@@ -18,65 +48,103 @@ const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
     if (showSidebar) setComponentHasMounted(true);
   }, [showSidebar]);
 
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
+
   function closeSidebar() {
     setShowSidebar((prev) => !prev);
   }
   return (
-    <aside
-      className={
-        showSidebar ? "Sidebar" : componentHasMounted ? "Sidebar close" : "hide"
-      }
-    >
-      <nav>
-        <Link to="/" onClick={closeSidebar}>
-          Home
-        </Link>
-        <Link onClick={closeSidebar} to="/menuPage">
-          Menu
-        </Link>
-        <Link onClick={closeSidebar} to="/orderDashboard">
-          Order
-        </Link>
-        <Link onClick={closeSidebar} to="/">
-          About
-        </Link>
-        <Link onClick={closeSidebar} to="/">
-          Events
-        </Link>
-        <Link onClick={closeSidebar} to="/bookTable">
-          Reservation
-        </Link>
-        <Link onClick={closeSidebar} to="/contactPage">
-          Contact
-        </Link>
-        <Link onClick={closeSidebar} to="/faqPage">
-          FAQ
-        </Link>
-        <Link onClick={closeSidebar} to="/reviewPage">
-          Reviews
-        </Link>
-      </nav>
-      <ul>
-        <li>
-          <Link to="/">
-            <InstagramIcon />
-            <span className="screen-reader-text">instagram</span>
-          </Link>
-        </li>
-        <li>
-          <Link to="/">
-            <FacebookIcon />
-            <span className="screen-reader-text">facebook-f</span>
-          </Link>
-        </li>
-        <li>
-          <Link to="/">
-            <TwitterIcon />
-            <span className="screen-reader-text">twitter</span>
-          </Link>
-        </li>
-      </ul>
-    </aside>
+    <Drawer anchor="left" open={showSidebar} onClose={toggleSidebar}>
+      <List sx={styles.list}>
+        <ListItem button component={Link} to="/" onClick={closeSidebar}>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItem>
+        <ListItem button component={Link} to="/menuPage" onClick={closeSidebar}>
+          <ListItemIcon>
+            <RestaurantMenuIcon />
+          </ListItemIcon>
+          <ListItemText primary="Menu" />
+        </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to="/orderDashboard"
+          onClick={closeSidebar}
+        >
+          <ListItemIcon>
+            <ShoppingBasketIcon />
+          </ListItemIcon>
+          <ListItemText primary="Order" />
+        </ListItem>
+        <ListItem button component={Link} to="/" onClick={closeSidebar}>
+          <ListItemIcon>
+            <InfoIcon />
+          </ListItemIcon>
+          <ListItemText primary="About" />
+        </ListItem>
+        <ListItem button component={Link} to="/" onClick={closeSidebar}>
+          <ListItemIcon>
+            <EventIcon />
+          </ListItemIcon>
+          <ListItemText primary="Events" />
+        </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to="/bookTable"
+          onClick={closeSidebar}
+        >
+          <ListItemIcon>
+            <BookIcon />
+          </ListItemIcon>
+          <ListItemText primary="Reservation" />
+        </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to="/contactPage"
+          onClick={closeSidebar}
+        >
+          <ListItemIcon>
+            <ContactMailIcon />
+          </ListItemIcon>
+          <ListItemText primary="Contact" />
+        </ListItem>
+        <ListItem button component={Link} to="/faqPage" onClick={closeSidebar}>
+          <ListItemIcon>
+            <HelpIcon />
+          </ListItemIcon>
+          <ListItemText primary="FAQ" />
+        </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to="/reviewPage"
+          onClick={closeSidebar}
+        >
+          <ListItemIcon>
+            <RateReviewIcon />
+          </ListItemIcon>
+          <ListItemText primary="Reviews" />
+        </ListItem>
+      </List>
+      <Stack direction="row" spacing={2}>
+        <Button href="/">
+          <InstagramIcon sx={{ color: "#E4405F" }} />
+        </Button>
+        <Button href="/">
+          <FacebookIcon sx={{ color: "#1877F2" }} />
+        </Button>
+        <Button href="/">
+          <TwitterIcon sx={{ color: "#1DA1F2" }} />
+        </Button>
+      </Stack>
+    </Drawer>
   );
 };
 export default Sidebar;

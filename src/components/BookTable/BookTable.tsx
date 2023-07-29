@@ -3,10 +3,28 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import "./BookTable.scss";
 import "firebase/firestore";
-
+import {
+  Typography,
+  Container,
+  Grid,
+  TextField,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormLabel,
+  FormControl,
+  Button,
+} from "@mui/material";
 import app from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { addReservation } from "../../utils/services/addReservation";
+
+const styles = {
+  radioGroup: {
+    display: "flex",
+    flexDirection: "row",
+  },
+};
 
 const BookTable = () => {
   const user = useSelector((state: RootState) => state.rootReducer.user);
@@ -66,123 +84,113 @@ const BookTable = () => {
 
   return (
     <main className="Book-table">
-      <div>
-        <img src={require(`../../assets/images/Group 16(1).png`)} alt=""></img>
-      </div>
-      <div className="content-container">
-        <h2>Book A Table</h2>
-
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <label htmlFor="people">
-            People
-            <input
-              type="number"
-              id="people"
-              name="people"
-              step="1"
-              min="1"
-              max="15"
-              value={people}
-              onChange={(e) => handlePeopleChange(e)}
-            />
-          </label>
-          <label htmlFor="date">
-            Select a date
-            <input
-              type="date"
-              id="date"
-              name="date"
-              value={selectedDate}
-              min={today}
-              onChange={(e) => handleDateChange(e.target.value)}
-            />
-          </label>
-          <fieldset>
-            <legend>Time</legend>
-
+      <Container>
+        <Grid container spacing={2}>
+          {/* <img src={require(`../../assets/images/Group 16(1).png`)} alt="" /> */}
+          <Grid item xs={12} sm={12}>
+            <Typography variant="h2">Book A Table</Typography>
+          </Grid>
+          <Grid item xs={12} sm={5} sx={{ gridColumn: "2 / span 9" }}>
             <div>
-              <input
-                id="first-time"
-                type="radio"
-                value="5:30 PM"
-                checked={time === "5:30 PM"}
-                onChange={(e) => handleTimeChange(e)}
-              />
-              <label htmlFor="first-time">5:30 PM</label>
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <FormControl fullWidth>
+                  <TextField
+                    type="number"
+                    id="people"
+                    name="people"
+                    label="People"
+                    variant="outlined"
+                    value={people}
+                    onChange={handlePeopleChange}
+                  />
+                </FormControl>
+                <FormControl fullWidth>
+                  <TextField
+                    type="date"
+                    id="date"
+                    name="date"
+                    // label="Select a date"
+                    value={selectedDate}
+                    inputProps={{ min: today }}
+                    onChange={(e) => handleDateChange(e.target.value)}
+                  />
+                </FormControl>
+                <FormControl fullWidth component="fieldset">
+                  <FormLabel component="legend">Time</FormLabel>
+                  <RadioGroup
+                    sx={styles.radioGroup}
+                    value={time}
+                    onChange={handleTimeChange}
+                  >
+                    <FormControlLabel
+                      value="5:30 PM"
+                      control={<Radio />}
+                      label="5:30 PM"
+                    />
+                    <FormControlLabel
+                      value="6:30 PM"
+                      control={<Radio />}
+                      label="6:30 PM"
+                    />
+                    <FormControlLabel
+                      value="7:30 PM"
+                      control={<Radio />}
+                      label="7:30 PM"
+                    />
+                    <FormControlLabel
+                      value="8:30 PM"
+                      control={<Radio />}
+                      label="8:30 PM"
+                    />
+                    <FormControlLabel
+                      value="9:30 PM"
+                      control={<Radio />}
+                      label="9:30 PM"
+                    />
+                  </RadioGroup>
+                </FormControl>
+                <FormControl fullWidth>
+                  <TextField
+                    type="number"
+                    id="optionalNumber"
+                    value={optionalNumber || ""}
+                    label="Phone Number"
+                    placeholder="Optional"
+                    onChange={handleOptionalNumberChange}
+                  />
+                </FormControl>
+                <FormControl fullWidth>
+                  <TextField
+                    multiline
+                    rows={4}
+                    id="specialRequest"
+                    value={specialRequest || ""}
+                    label="Special Request"
+                    placeholder="Optional"
+                    onChange={handleSpecialRequestChange}
+                  />
+                </FormControl>
+                <div>
+                  {!user.displayName && (
+                    <div>
+                      <Typography>Please sign in to continue!</Typography>{" "}
+                      <Link to="/SignInPage">Login</Link>
+                    </div>
+                  )}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    disabled={!user.email}
+                    type="submit"
+                  >
+                    Reserve
+                  </Button>
+                </div>
+              </form>
             </div>
-            <div>
-              <input
-                id="second-time"
-                type="radio"
-                value="6:30 PM"
-                checked={time === "6:30 PM"}
-                onChange={handleTimeChange}
-              />
-              <label htmlFor="second-time">6:30 PM</label>
-            </div>
-            <div>
-              <input
-                id="third-time"
-                type="radio"
-                value="7:30 PM"
-                checked={time === "7:30 PM"}
-                onChange={handleTimeChange}
-              />
-              <label htmlFor="third-time">7:30 PM</label>
-            </div>
-            <div>
-              <input
-                id="fourth-time"
-                type="radio"
-                value="8:30 PM"
-                checked={time === "8:30 PM"}
-                onChange={handleTimeChange}
-              />
-              <label htmlFor="fourth-time">8:30 PM</label>
-            </div>
-            <div>
-              <input
-                id="fifth-time"
-                type="radio"
-                value="9:30 PM"
-                checked={time === "9:30 PM"}
-                onChange={handleTimeChange}
-              />
-              <label htmlFor="fifth-time">9:30 PM</label>
-            </div>
-          </fieldset>
-          <label htmlFor="optionalNumber">
-            Phone Number:
-            <input
-              type="number"
-              id="optionalNumber"
-              value={optionalNumber || ""}
-              placeholder="Optional"
-              onChange={handleOptionalNumberChange}
-            />
-          </label>
-          <label htmlFor="specialRequest">
-            Special Request:
-            <textarea
-              id="specialRequest"
-              value={specialRequest || ""}
-              onChange={handleSpecialRequestChange}
-              placeholder="Optional"
-            />
-          </label>
-          <div className="button-container">
-            {!user.displayName && (
-              <div className="login-warning">
-                <p>Please sign in to continue!</p>{" "}
-                <Link to="/SignInPage">Login</Link>
-              </div>
-            )}
-            <button disabled={!user.email} type="submit">
-              Reserve
-            </button>
-          </div>
-        </form>
-      </div>
+          </Grid>
+        </Grid>
+      </Container>
     </main>
   );
 };
