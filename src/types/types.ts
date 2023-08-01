@@ -40,3 +40,11 @@ export type AddressData = {
   city: string;
   addressLineTwo: string;
 };
+
+export type UserData = {
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+  phoneNumber: number | string | null;
+  address: Partial<AddressData>;
+};

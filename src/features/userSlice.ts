@@ -31,18 +31,20 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    changeUserName: (
-      state: User,
-      action: { payload: { userName: string } }
-    ) => {
-      state.userName = action.payload.userName;
+    changeUserName: (state: User, action: { payload: string }) => {
+      state.displayName = action.payload;
+      console.log("changed usernmae");
     },
+
     updateFirstName: (state: User, action: { payload: string }) => {
       state.firstName = action.payload;
       console.log(state.firstName);
     },
     updateLastName: (state: User, action: { payload: string }) => {
       state.lastName = action.payload;
+    },
+    updateUserEmail: (state: User, action: { payload: string }) => {
+      state.email = action.payload;
     },
     updatePhoneNumber: (state: User, action: { payload: string | number }) => {
       state.phoneNumber = action.payload;
@@ -105,6 +107,7 @@ export const {
   updateFirstName,
   updateLastName,
   updatePhoneNumber,
+  updateUserEmail,
   updateAddress,
 } = userSlice.actions;
 
