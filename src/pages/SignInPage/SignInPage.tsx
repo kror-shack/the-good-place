@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { findByLabelText } from "@testing-library/react";
 import { ReactComponent as GoogleIcon } from "../../assets/svgs/google.svg";
 import {
+  useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
@@ -28,12 +29,21 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  Snackbar,
+  Stack,
+} from "@mui/material";
 
 const defaultTheme = createTheme();
 
 const styles = {
   main: {
-    marginTop: "15rem",
+    marginTop: "10rem",
     display: "flex",
     justifyContent: "center",
 
@@ -45,7 +55,8 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    boxShadow: "rgb(38 57 77) 0px 1px 35px -13px",
+    boxShadow: "0px 10px 15px -3px rgba(0,0,0,0.1)",
+    borderRadius: "15px",
     padding: "1rem",
   },
   googleLogin: {
@@ -72,6 +83,17 @@ const SignInPage = () => {
   ] = useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle, userFromGoogle, loadingFromGoogle, errorFromGoogle] =
     useSignInWithGoogle(auth);
+  const [open, setOpen] = useState(false);
+  const [openSnackBar, setOpenSnackBar] = useState<string | false>(false);
+  const [resetStatus, setResetStatus] = useState<boolean | null>(null);
+
+  const [resetEmail, setResetEmail] = useState("");
+  const [sendPasswordResetEmail, sending, error] =
+    useSendPasswordResetEmail(auth);
+
+  const handleResetEmailChange = (value: string) => {
+    setResetEmail(value);
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -92,6 +114,30 @@ const SignInPage = () => {
   const signInFromGoogle = async () => {
     await signInWithGoogle();
   };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSendResetLink = () => {
+    sendResetLink();
+    handleClose();
+  };
+
+  async function sendResetLink() {
+    if (!resetEmail) return;
+    const success = await sendPasswordResetEmail(resetEmail);
+    setResetStatus(success);
+  }
+
+  useEffect(() => {
+    if (error) alert("There was an error while sending the email");
+    if (resetStatus) alert("Please check your inbox for the reset link");
+  }, [resetStatus]);
 
   async function googleSignIn() {
     if (!userFromGoogle) return;
@@ -119,6 +165,16 @@ const SignInPage = () => {
     }
   }, [userFromGoogle, userFromEmail]);
 
+  useEffect(() => {
+    if (!userFromEmail && userFromGoogle) {
+      googleSignIn();
+      navigate("/");
+    } else if (userFromEmail && !userFromGoogle) {
+      emailSignIn();
+      navigate("/");
+    }
+  }, [userFromGoogle, userFromEmail]);
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container
@@ -128,6 +184,38 @@ const SignInPage = () => {
         maxWidth="xs"
       >
         <CssBaseline />
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+          maxWidth="md"
+        >
+          <DialogTitle id="form-dialog-title">Reset Password</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="email"
+              label="Email Address"
+              type="email"
+              fullWidth
+              value={resetEmail}
+              onChange={(e) => handleResetEmailChange(e.target.value)}
+            />
+          </DialogContent>
+          <DialogContent>
+            <Typography>
+              You will receive an email if this email address is associated with
+              an account.
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleSendResetLink} variant="contained">
+              Send Reset Link
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Box sx={styles.box}>
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
@@ -178,6 +266,8 @@ const SignInPage = () => {
             >
               Sign In
             </Button>
+            <Divider>or</Divider>
+
             <Button
               fullWidth
               variant="contained"
@@ -190,15 +280,23 @@ const SignInPage = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link style={{ fontSize: "0.9rem" }} to="#">
-                  Forgot password?
-                </Link>
+                <Stack>
+                  <Button
+                    onClick={handleClickOpen}
+                    style={{ fontSize: "0.9rem" }}
+                  >
+                    Forgot password?
+                  </Button>
+                  <Link style={{ fontSize: "0.9rem" }} to="/SignUpPage">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Stack>
               </Grid>
-              <Grid item>
-                <Link style={{ fontSize: "0.9rem" }} to="/SignUpPage">
+              {/* <Grid item> */}
+              {/* <Link style={{ fontSize: "0.9rem" }} to="/SignUpPage">
                   {"Don't have an account? Sign Up"}
                 </Link>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Box>
         </Box>
