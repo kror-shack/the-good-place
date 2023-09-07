@@ -38,6 +38,15 @@ const styles = {
       marginTop: "3rem",
     },
   },
+  listItem: {
+    "&:hover": {
+      color: "rgba(4, 120, 87, 0.9098039216)",
+
+      svg: {
+        color: "rgba(4, 120, 87, 0.9098039216)",
+      },
+    },
+  },
 };
 
 const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
@@ -58,13 +67,25 @@ const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
   return (
     <Drawer anchor="left" open={showSidebar} onClose={toggleSidebar}>
       <List sx={styles.list}>
-        <ListItem button component={Link} to="/" onClick={closeSidebar}>
+        <ListItem
+          sx={styles.listItem}
+          button
+          component={Link}
+          to="/"
+          onClick={closeSidebar}
+        >
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button component={Link} to="/menuPage" onClick={closeSidebar}>
+        <ListItem
+          sx={styles.listItem}
+          button
+          component={Link}
+          to="/menuPage"
+          onClick={closeSidebar}
+        >
           <ListItemIcon>
             <RestaurantMenuIcon />
           </ListItemIcon>
@@ -72,6 +93,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
         </ListItem>
         <ListItem
           button
+          sx={styles.listItem}
           component={Link}
           to="/orderDashboard"
           onClick={closeSidebar}
@@ -81,22 +103,35 @@ const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
           </ListItemIcon>
           <ListItemText primary="Order" />
         </ListItem>
-        <ListItem button component={Link} to="/" onClick={closeSidebar}>
+        <ListItem
+          sx={styles.listItem}
+          button
+          component={Link}
+          to="/"
+          onClick={closeSidebar}
+        >
           <ListItemIcon>
             <InfoIcon />
           </ListItemIcon>
           <ListItemText primary="About" />
         </ListItem>
-        <ListItem button component={Link} to="/" onClick={closeSidebar}>
+        <ListItem
+          sx={styles.listItem}
+          button
+          component={Link}
+          to="/"
+          onClick={closeSidebar}
+        >
           <ListItemIcon>
             <EventIcon />
           </ListItemIcon>
           <ListItemText primary="Events" />
         </ListItem>
         <ListItem
+          sx={styles.listItem}
           button
           component={Link}
-          to="/bookTable"
+          to="/bookTablePage"
           onClick={closeSidebar}
         >
           <ListItemIcon>
@@ -105,6 +140,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
           <ListItemText primary="Reservation" />
         </ListItem>
         <ListItem
+          sx={styles.listItem}
           button
           component={Link}
           to="/contactPage"
@@ -115,13 +151,20 @@ const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
           </ListItemIcon>
           <ListItemText primary="Contact" />
         </ListItem>
-        <ListItem button component={Link} to="/faqPage" onClick={closeSidebar}>
+        <ListItem
+          sx={styles.listItem}
+          button
+          component={Link}
+          to="/faqPage"
+          onClick={closeSidebar}
+        >
           <ListItemIcon>
             <HelpIcon />
           </ListItemIcon>
           <ListItemText primary="FAQ" />
         </ListItem>
         <ListItem
+          sx={styles.listItem}
           button
           component={Link}
           to="/reviewPage"

@@ -18,14 +18,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-
-interface User {
-  uid: string | null;
-  email: string | null;
-  photoURL: string | null;
-  displayName: string | null;
-  userName?: string;
-}
+import { User } from "../../types/types";
 
 type Props = {
   showSidebar: boolean;
@@ -85,7 +78,7 @@ const styles = {
 
     "&:hover": {
       color: "white",
-      backgroundColor: "#8fa2a0",
+      backgroundColor: "rgba(4, 120, 87, 0.9098039216)",
       border: "none",
     },
 
@@ -117,7 +110,7 @@ const Header = ({ showSidebar, setShowSidebar }: Props) => {
     console.log("opening the side bar");
     setShowSidebar((prev) => !prev);
   }
-  const user = useSelector((state: RootState) => state.rootReducer.user);
+  const user: User = useSelector((state: RootState) => state.rootReducer.user);
   return (
     <AppBar className="header" sx={styles.appBar} position="fixed">
       <Toolbar sx={styles.toolbar} className="tool-bar">
@@ -136,7 +129,7 @@ const Header = ({ showSidebar, setShowSidebar }: Props) => {
           The Good Place
           <MainLogo className="main-icon" />
         </Typography>{" "}
-        {user && user.email ? (
+        {user.isAuthenticated ? (
           <AvatarMenu />
         ) : (
           <Button

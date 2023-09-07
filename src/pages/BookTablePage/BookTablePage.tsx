@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import "./BookTable.scss";
+import "./BookTablePage.scss";
 import "firebase/firestore";
 import {
   Typography,
@@ -26,11 +26,11 @@ const styles = {
   },
 };
 
-const BookTable = () => {
+const BookTablePage = () => {
   const user = useSelector((state: RootState) => state.rootReducer.user);
   const navigate = useNavigate();
 
-  const [people, setPeople] = useState<number>(1);
+  const [people, setPeople] = useState<number | null>(null);
   const [time, setTime] = useState<string>("");
   const [optionalNumber, setOptionalNumber] = useState<number | null>(null);
   const [specialRequest, setSpecialRequest] = useState<string | null>(null);
@@ -69,6 +69,7 @@ const BookTable = () => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!people) return;
     const reservationMade = await addReservation(
       user.email,
       user.displayName,
@@ -98,7 +99,7 @@ const BookTable = () => {
                     type="number"
                     id="people"
                     name="people"
-                    label="People"
+                    label="No. of Guests"
                     variant="outlined"
                     value={people}
                     onChange={handlePeopleChange}
@@ -173,8 +174,10 @@ const BookTable = () => {
                 <div>
                   {!user.displayName && (
                     <div>
-                      <Typography>Please sign in to continue!</Typography>{" "}
-                      <Link to="/SignInPage">Login</Link>
+                      <Typography>
+                        Please sign in to continue!{" "}
+                        <Link to="/SignInPage">Login</Link>
+                      </Typography>{" "}
                     </div>
                   )}
                   <Button
@@ -195,4 +198,4 @@ const BookTable = () => {
   );
 };
 
-export default BookTable;
+export default BookTablePage;

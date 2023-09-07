@@ -1,12 +1,16 @@
-export interface User {
+export type User = {
   uid: string | null;
+  isAuthenticated: boolean;
   email: string | null;
   photoURL: string | null;
   displayName: string | null;
   userName?: string;
   isAdmin: boolean;
-}
-
+  address: AddressData | null;
+  phoneNumber: number | string | null;
+  firstName: string | null;
+  lastName: string | null;
+};
 export type SignUpForm = {
   email: undefined | string;
   password: undefined | string;

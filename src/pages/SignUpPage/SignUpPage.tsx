@@ -29,7 +29,7 @@ import "./SignUpPage.scss";
 
 const styles = {
   main: {
-    marginTop: "15rem",
+    marginTop: "9rem",
     display: "flex",
     justifyContent: "center",
 
@@ -41,7 +41,8 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    boxShadow: "rgb(38 57 77) 0px 1px 35px -13px",
+    boxShadow: "0px 10px 15px -3px rgba(0,0,0,0.1)",
+    borderRadius: "15px",
     padding: "1rem",
   },
 };

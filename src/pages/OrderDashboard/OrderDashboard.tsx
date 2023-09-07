@@ -3,7 +3,7 @@ import { AppDispatch, RootState } from "../../store/store";
 import "./OrderDashboard.scss";
 import uniqid from "uniqid";
 import { addToCart } from "../../features/cartSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { forwardRef, useEffect, useState } from "react";
 import calculateTotalCartItems from "../../utils/helperFunctions/calculateTotalCartItems";
 import {
@@ -21,6 +21,8 @@ import {
   Alert,
   AlertTitle,
   Snackbar,
+  createTheme,
+  ThemeProvider,
 } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -67,6 +69,23 @@ const Transition = forwardRef(function Transition(
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+
+const theme = createTheme({
+  palette: {
+    secondary: {
+      main: "#0d9488", // Green color
+    },
+  },
+});
+
+const styles = {
+  buttonStyles: {
+    color: "#0d9488",
+    borderColor: "#0d9488",
+    marginTop: "0.5rem",
+    marginBottom: "0rem",
+  },
+};
 
 const OrderDashboard = () => {
   const user = useSelector((state: RootState) => state.rootReducer.user);
@@ -134,6 +153,7 @@ const OrderDashboard = () => {
   const [shownMenu, setShownMenu] = useState(Appetizers);
   const [activeTab, setActiveTab] = useState<string>("Appetizers");
   const [selectedTab, setSelectedTab] = useState(0);
+  const navigate = useNavigate();
 
   function handleTabClick(tab: string) {
     setActiveTab(tab);
@@ -141,9 +161,8 @@ const OrderDashboard = () => {
 
   function addProductToCart(product: CartItem) {
     console.log(cart);
-    if (!user || !user.email) {
+    if (!user.isAuthenticated) {
       setShowAlert(true);
-      console.log("user does not exist");
       return;
     }
 
@@ -179,133 +198,146 @@ const OrderDashboard = () => {
   }, [addProductToCart]);
 
   return (
-    <Container
-      className="Order-dashboard"
-      component="main"
-      maxWidth="lg"
-      sx={{ padding: "0rem 0.5rem" }}
-    >
-      <Stack spacing={0} sx={{ justifyContent: "center" }}>
-        {/* cart container start */}
-        {items > 0 && (
-          <div className="cart-container">
-            <Link to="/checkoutPage">
-              <IconButton color="inherit">
+    <ThemeProvider theme={theme}>
+      <Container
+        className="Order-dashboard"
+        component="main"
+        maxWidth="lg"
+        sx={{ padding: "0rem 0.5rem" }}
+      >
+        <Stack spacing={0} sx={{ justifyContent: "center" }}>
+          {/* cart container start */}
+          {items > 0 && (
+            <div className="cart-container">
+              <IconButton
+                onClick={() => {
+                  console.log("gonna navigate");
+                  navigate("/checkoutpage");
+                  console.log("navigated");
+                }}
+                color="inherit"
+              >
                 <Badge badgeContent={items} color="primary">
                   <ShoppingCartIcon sx={{ color: "black" }} />
                 </Badge>
               </IconButton>
-            </Link>
-          </div>
-        )}
-        <Typography variant="h4">Order</Typography>
+            </div>
+          )}
+          <Typography variant="h4">Order</Typography>
 
-        {/* cart container end */}
-      </Stack>
-      <Tabs
-        value={selectedTab}
-        onChange={handleTabChange}
-        variant="scrollable"
-        scrollButtons="auto"
-        aria-label="Menu categories"
-      >
-        {categories.map((category, index) => (
-          <Tab key={index} label={category} />
-        ))}
-      </Tabs>
-      <Divider sx={{ marginBottom: "1rem" }} />
-      <Box>
-        <Grid container spacing={2} className="item-container">
-          {shownMenu.map((item) => (
-            <Grid xs={12} key={item.name}>
-              <Card>
-                <Stack
-                  direction="row"
-                  spacing={2}
-                  sx={{ alignItems: "center" }}
-                >
-                  {item.photoUrl && (
-                    <CardMedia
-                      component="img"
-                      image={item.photoUrl}
-                      alt={item.name}
-                      sx={{
-                        height: "6rem",
-                        width: "6rem",
-                        borderRadius: "5rem",
-                      }}
-                    />
-                  )}
-                  <CardContent>
-                    <div className="item-title">
-                      <Typography variant="h5" component="h3">
-                        {item.name}
-                      </Typography>
-                      <Typography variant="body1" className="price">
-                        ${item.price.toFixed(2)}
-                      </Typography>
-                    </div>
-                    <hr className="title-line" />
-                    {item.description && (
-                      <Typography variant="body2" className="description">
-                        {item.description}
-                      </Typography>
-                    )}
-                    <div className="button-container">
-                      <Button onClick={() => addProductToCart(item)}>
-                        Add to cart
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Stack>
-                <Snackbar
-                  open={openSnackBar}
-                  autoHideDuration={6000}
-                  onClose={handleClose}
-                >
-                  <Alert
-                    onClose={handleClose}
-                    severity="success"
-                    sx={{ width: "100%" }}
-                  >
-                    {item.name} added to cart!
-                  </Alert>
-                </Snackbar>
-              </Card>
-            </Grid>
+          {/* cart container end */}
+        </Stack>
+        <Tabs
+          value={selectedTab}
+          onChange={handleTabChange}
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="Menu categories"
+          textColor="secondary"
+          indicatorColor="secondary"
+        >
+          {categories.map((category, index) => (
+            <Tab key={index} label={category} />
           ))}
-        </Grid>
-      </Box>
-      <Dialog
-        open={showAlert}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handlePopUpClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{"Login Required"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Please Login to continue ordering.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handlePopUpClose}>Close</Button>
-          <Link
-            style={{
-              textDecoration: "none",
-              lineHeight: "1.75rem",
-              color: "red",
-              fontFamily: "Roboto",
-            }}
-            to="/SignInPage"
-            className="sign-in-link"
-          >
-            LOGIN
-          </Link>
-        </DialogActions>
-      </Dialog>
-    </Container>
+        </Tabs>
+        <Divider sx={{ marginBottom: "1rem" }} />
+        <Box>
+          <Grid container spacing={2} className="item-container">
+            {shownMenu.map((item) => (
+              <Grid xs={12} key={item.name}>
+                <Card>
+                  <Stack
+                    direction="row"
+                    spacing={2}
+                    sx={{ alignItems: "center" }}
+                  >
+                    {item.photoUrl && (
+                      <CardMedia
+                        component="img"
+                        image={item.photoUrl}
+                        alt={item.name}
+                        sx={{
+                          height: "6rem",
+                          width: "6rem",
+                          borderRadius: "5rem",
+                        }}
+                      />
+                    )}
+                    <CardContent>
+                      <div className="item-title">
+                        <Typography variant="h5" component="h3">
+                          {item.name}
+                        </Typography>
+                        <Typography variant="body1" className="price">
+                          ${item.price.toFixed(2)}
+                        </Typography>
+                      </div>
+                      <hr className="title-line" />
+                      {item.description && (
+                        <Typography variant="body2" className="description">
+                          {item.description}
+                        </Typography>
+                      )}
+                      <div className="button-container">
+                        <Button
+                          sx={styles.buttonStyles}
+                          variant="outlined"
+                          onClick={() => addProductToCart(item)}
+                        >
+                          Add to cart
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Stack>
+                  <Snackbar
+                    open={openSnackBar}
+                    autoHideDuration={6000}
+                    onClose={handleClose}
+                  >
+                    <Alert
+                      onClose={handleClose}
+                      severity="success"
+                      sx={{ width: "100%" }}
+                    >
+                      {item.name} added to cart!
+                    </Alert>
+                  </Snackbar>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+        <Dialog
+          open={showAlert}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handlePopUpClose}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle>{"Login Required"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Please Login to continue ordering.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handlePopUpClose}>Close</Button>
+            <Link
+              style={{
+                textDecoration: "none",
+                lineHeight: "1.75rem",
+                color: "red",
+                fontFamily: "Roboto",
+              }}
+              to="/SignInPage"
+              className="sign-in-link"
+            >
+              LOGIN
+            </Link>
+          </DialogActions>
+        </Dialog>
+      </Container>
+    </ThemeProvider>
   );
 };
 

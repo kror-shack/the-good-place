@@ -24,7 +24,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Avatar, Backdrop, CircularProgress, Rating } from "@mui/material";
+import {
+  Alert,
+  Avatar,
+  Backdrop,
+  CircularProgress,
+  Rating,
+  Snackbar,
+} from "@mui/material";
 import "./ReviewPage.scss";
 
 const styles = {
@@ -65,8 +72,15 @@ const styles = {
 const defaultTheme = createTheme();
 
 export default function ReviewPage() {
+  const user = useSelector((state: RootState) => state.rootReducer.user);
+  const [error, setError] = useState(false);
   const [reviews, setReviews] = useState<Partial<ReviewData>[]>();
   const [showReviewForm, setShowReviewForm] = useState(false);
+
+  function handleShowReview() {
+    if (!user.email) setError(true);
+    else setShowReviewForm((prev) => !prev);
+  }
 
   async function fetchReviews() {
     const reviewList = await getReviews();
@@ -88,6 +102,15 @@ export default function ReviewPage() {
             pb: 6,
           }}
         >
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            open={error}
+            autoHideDuration={6000}
+            onClose={() => setError(false)}
+            message="Please login to leave a review"
+          >
+            <Alert severity="error">Please Login to leave a review!</Alert>
+          </Snackbar>
           <Container maxWidth="sm">
             <Typography
               component="h1"
@@ -108,12 +131,18 @@ export default function ReviewPage() {
             >
               What Our Visitors Say
             </Typography>
-            <div>
-              <button onClick={() => setShowReviewForm((prev) => !prev)}>
+            <Box>
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "rgba(4, 120, 87, 0.9098039216)" }}
+                onClick={() => handleShowReview()}
+              >
                 Add review
-              </button>
-              {showReviewForm && <ReviewInputForm />}{" "}
-            </div>
+              </Button>
+              {showReviewForm && (
+                <ReviewInputForm openDialog={showReviewForm} />
+              )}{" "}
+            </Box>
           </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">

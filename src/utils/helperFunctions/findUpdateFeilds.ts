@@ -8,9 +8,11 @@ export default function findUpdatedFields(
 
   if (finalData.firstName !== initialData.firstName) {
     updatedFields.firstName = finalData.firstName;
+     updatedFields.lastName = finalData.lastName;
   }
 
   if (finalData.lastName !== initialData.lastName) {
+    updatedFields.firstName = finalData.firstName;
     updatedFields.lastName = finalData.lastName;
   }
 

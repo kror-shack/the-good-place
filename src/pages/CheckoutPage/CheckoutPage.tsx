@@ -27,6 +27,8 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import ReviewOrder from "../../components/ReviewOrder/ReviewOrder";
+import { createTheme } from "@mui/system";
+import { ThemeProvider } from "@emotion/react";
 // import AddressForm from "./AddressForm";
 // import PaymentForm from "./PaymentForm";
 // import Review from "./Review";
@@ -41,9 +43,16 @@ interface CartItem {
 const steps = ["Shopping Cart", "Shipping address", "Review your order"];
 
 export default function Checkout() {
+  console.log("11111");
   const user = useSelector((state: RootState) => state.rootReducer.user);
+  console.log("222222");
+
   const cart = useSelector((state: RootState) => state.rootReducer.cart);
+  console.log("33333");
+
   const cartItems: CartItem[] = cart.items;
+  console.log("44444");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -56,6 +65,10 @@ export default function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  useEffect(() => {
+    console.log("in the checkout page");
+  }, []);
 
   function getStepContent(step: number) {
     switch (step) {
@@ -133,7 +146,17 @@ export default function Checkout() {
               {getStepContent(activeStep)}
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 {activeStep !== 0 && (
-                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                  <Button
+                    onClick={handleBack}
+                    sx={{
+                      mt: 3,
+                      ml: 1,
+                      color: "rgba(4, 120, 87, 0.9098039216)",
+                      "&: hover": {
+                        color: "rgba(4, 120, 87, 1)",
+                      },
+                    }}
+                  >
                     Back
                   </Button>
                 )}
@@ -144,7 +167,15 @@ export default function Checkout() {
                       ? handlePlaceOrder
                       : handleNext
                   }
-                  sx={{ mt: 3, ml: 1 }}
+                  sx={{
+                    mt: 3,
+                    ml: 1,
+                    backgroundColor: "rgba(4, 120, 87, 0.9098039216)",
+                    borderColor: "rgba(4, 120, 87, 0.9098039216)",
+                    "&: hover": {
+                      backgroundColor: "rgba(4, 120, 87, 1)",
+                    },
+                  }}
                   disabled={cartItems.length === 0 ? true : false}
                 >
                   {activeStep === steps.length - 1 ? "Place order" : "Next"}
@@ -157,44 +188,3 @@ export default function Checkout() {
     </React.Fragment>
   );
 }
-
-// const CheckoutPage: React.FC = () => {
-//   const user = useSelector((state: RootState) => state.rootReducer.user);
-//   const navigate = useNavigate();
-//   const [shownComponent, setShownComponent] = useState(1);
-
-//   function handleProceed() {
-//     setShownComponent((prev) => prev + 1);
-//   }
-
-//   return (
-//     <main className="Checkout-page">
-//       <div className="tab-headers">
-//         <h1 className={shownComponent === 1 ? "selected" : ""}>
-//           1.Shopping Cart
-//         </h1>
-//         <h1 className={shownComponent === 2 ? "selected" : ""}>
-//           2.Address Details
-//         </h1>
-//         <h1 className={shownComponent === 3 ? "selected" : ""}>
-//           3.Review Order
-//         </h1>
-//       </div>
-//       {shownComponent === 1 && <ShoppingCart />}
-//       {shownComponent === 2 && (
-//         <AddressDetails setShownComponent={setShownComponent} />
-//       )}
-//       {shownComponent === 3 && <div></div>}
-
-//       {shownComponent < 3 ? (
-//         <button className="proceed-button" onClick={() => handleProceed()}>
-//           Proceed
-//         </button>
-//       ) : (
-//         <button className="proceed-button">Place Order</button>
-//       )}
-//     </main>
-//   );
-// };
-
-// export default CheckoutPage;

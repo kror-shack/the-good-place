@@ -10,8 +10,21 @@ import {
   Container,
   Stack,
   Divider,
+  withStyles,
+  createTheme,
+  ThemeProvider,
+  CssBaseline,
+  Box,
 } from "@mui/material";
 import "./MenuPage.scss";
+
+const theme = createTheme({
+  palette: {
+    secondary: {
+      main: "#0d9488", // Green color
+    },
+  },
+});
 
 interface FoodItem {
   name: string;
@@ -26,21 +39,23 @@ interface Menu {
 const MenuPage = () => {
   const [showFoodMenu, setShowFoodMenu] = useState(true);
   const foodMenu: Menu = {
-    Appetizer: [
+    Appetizers: [
       {
         name: "Crispy Calamari Delight",
         price: 5.5,
         description: "Deep-fried calamari rings served with tangy sauce.",
       },
       {
-        name: "Crispy Calamari Delight",
-        price: 5.5,
-        description: "Deep-fried calamari rings served with tangy sauce.",
+        name: "Caprese Salad Skewers",
+        price: 8.0,
+        description:
+          "Fresh tomatoes, mozzarella, basil on skewers, drizzled with balsamic glaze.",
       },
       {
-        name: "Crispy Calamari Delight",
-        price: 5.5,
-        description: "Deep-fried calamari rings served with tangy sauce.",
+        name: "Grilled Bruschetta Sticks",
+        price: 3.5,
+        description:
+          "Grilled bread topped with tomatoes, basil, garlic, and olive oil",
       },
     ],
     Pastas: [
@@ -50,14 +65,14 @@ const MenuPage = () => {
         description: "Spaghetti served with rich tomato meat sauce and onions.",
       },
       {
-        name: "Spaghetti Bolognese",
-        price: 10.99,
-        description: "Spaghetti served with rich tomato meat sauce and onions.",
+        name: "Fettuccine Alfredo",
+        price: 12.95,
+        description: "Creamy Alfredo sauce served over fettuccine pasta.",
       },
       {
-        name: "Spaghetti Bolognese",
-        price: 10.99,
-        description: "Spaghetti served with rich tomato meat sauce and onions.",
+        name: "Penne Arrabiata",
+        price: 11.5,
+        description: "Penne pasta with spicy tomato sauce, garlic, and herbs.",
       },
     ],
     Entrees: [
@@ -255,81 +270,102 @@ const MenuPage = () => {
   }
 
   return (
-    <Container
-      className="Menu-page"
-      component="main"
-      maxWidth="lg"
-      sx={{ border: "1px solid #222", padding: "0rem 0.5rem" }}
-    >
-      <Typography variant="h4">Menu</Typography>
-      <div className="vertical-line-container">
-        <div className="vertical-line" />
-      </div>
-      <Tabs
-        value={showFoodMenu ? 0 : 1}
-        onChange={(event, newValue) =>
-          newValue === 0 ? handleFoodClick() : handleDrinkClick()
-        }
-        centered
-      >
-        <Tab label="Food" />
-        <Tab label="Drinks" />
-      </Tabs>
-      <div className="menu-container">
-        <Grid container spacing={2}>
-          {Object.entries(menu).map(([heading, items]) => (
-            <Grid item xs={12} sm={6} md={showFoodMenu ? 4 : 6} key={heading}>
-              <Paper>
-                <Typography
-                  sx={{ fontFamily: "Poppins", marginTop: "0.5rem" }}
-                  variant="h5"
-                  align="center"
+    <ThemeProvider theme={theme}>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Container
+          className="Menu-page"
+          component="main"
+          maxWidth="lg"
+          sx={{
+            border: "1px solid #222",
+            padding: "0rem",
+            marginRight: "0.1rem",
+            marginLeft: "0.1rem",
+            width: "98%",
+          }}
+        >
+          <Typography variant="h4">Menu</Typography>
+          <div className="vertical-line-container">
+            <div className="vertical-line" />
+          </div>
+          <Tabs
+            value={showFoodMenu ? 0 : 1}
+            onChange={(event, newValue) =>
+              newValue === 0 ? handleFoodClick() : handleDrinkClick()
+            }
+            centered
+            textColor="secondary"
+            indicatorColor="secondary"
+          >
+            <Tab label="Food" />
+            <Tab label="Drinks" />
+          </Tabs>
+          <div className="menu-container">
+            <Grid container spacing={2}>
+              {Object.entries(menu).map(([heading, items]) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={showFoodMenu ? 4 : 6}
+                  key={heading}
                 >
-                  {heading}
-                </Typography>
-                <ul>
-                  {items.map((item) => (
-                    <li key={item.name}>
-                      <Stack
-                        direction="row"
-                        sx={{
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        }}
-                        spacing={2}
-                      >
-                        <Typography
-                          sx={{ fontFamily: "Poppins" }}
-                          variant="subtitle1"
-                        >
-                          {item.name}
-                        </Typography>
-                        <Typography
-                          sx={{ fontFamily: "Poppins" }}
-                          variant="body2"
-                          gutterBottom
-                        >
-                          ${item.price.toFixed(2)}
-                        </Typography>
-                      </Stack>
-                      {item.description && (
-                        <Typography
-                          sx={{ fontFamily: "Poppins-light-italic" }}
-                          variant="body2"
-                        >
-                          {item.description}
-                        </Typography>
-                      )}
-                      <Divider />
-                    </li>
-                  ))}
-                </ul>
-              </Paper>
+                  <Paper>
+                    <Typography
+                      sx={{
+                        fontFamily: "Poppins",
+                        paddingTop: "0.5rem",
+                      }}
+                      variant="h5"
+                      align="center"
+                    >
+                      {heading}
+                    </Typography>
+                    <ul>
+                      {items.map((item) => (
+                        <li key={item.name}>
+                          <Stack
+                            direction="row"
+                            sx={{
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                            }}
+                            spacing={2}
+                          >
+                            <Typography
+                              sx={{ fontFamily: "Poppins" }}
+                              variant="subtitle1"
+                            >
+                              {item.name}
+                            </Typography>
+                            <Typography
+                              sx={{ fontFamily: "Poppins" }}
+                              variant="body2"
+                              gutterBottom
+                            >
+                              ${item.price.toFixed(2)}
+                            </Typography>
+                          </Stack>
+                          {item.description && (
+                            <Typography
+                              sx={{ fontFamily: "Poppins-light-italic" }}
+                              variant="body2"
+                            >
+                              {item.description}
+                            </Typography>
+                          )}
+                          <Divider />
+                        </li>
+                      ))}
+                    </ul>
+                  </Paper>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-      </div>
-    </Container>
+          </div>
+        </Container>
+      </Box>
+    </ThemeProvider>
   );
 };
 

@@ -4,6 +4,7 @@ import { AddressData } from "../types/types";
 
 interface User {
   uid: string | null;
+  isAuthenticated: boolean;
   email: string | null;
   photoURL: string | null;
   displayName: string | null;
@@ -17,6 +18,7 @@ interface User {
 
 const initialState: User = {
   uid: null,
+  isAuthenticated: false,
   email: null,
   photoURL: null,
   displayName: null,
@@ -73,6 +75,7 @@ const userSlice = createSlice({
       console.log("succeeded");
       console.log(action);
       state.email = action.payload.email;
+      state.isAuthenticated = true;
       state.displayName = action.payload.displayName;
     },
     setAdmin: (state: User) => {
@@ -84,6 +87,7 @@ const userSlice = createSlice({
       console.log(action);
       state.displayName = action.payload.displayName;
       state.email = action.payload.email;
+      state.isAuthenticated = true;
       state.photoURL = action.payload.photoURL;
       state.uid = action.payload.uid;
     },
@@ -92,6 +96,7 @@ const userSlice = createSlice({
       state.displayName = null;
       state.email = null;
       state.photoURL = null;
+      state.isAuthenticated = false;
       state.uid = null;
       state.isAdmin = false;
     },

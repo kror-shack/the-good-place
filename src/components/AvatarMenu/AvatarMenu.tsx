@@ -41,14 +41,13 @@ export interface loggedUser
 const AvatarMenu = () => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
-  console.log(isDesktop);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const user: loggedUser = useSelector(
     (state: RootState) => state.rootReducer.user
   );
   const dispatch: AppDispatch = useDispatch();
   const [userPhotoUrl, setUserPhotoUrl] = useState<string>(
-    "https://unsplash.com/photos/kTqx1Y48WOs"
+    "https://images.unsplash.com/photo-1502691876148-a84978e59af8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
   );
   const initials = getInitials(user.displayName);
   const navigate = useNavigate();
@@ -69,7 +68,6 @@ const AvatarMenu = () => {
   }
 
   async function handleSignOutUser() {
-    console.log("handling the sign out of the user");
     await signOut();
     dispatch(logoutUser());
     navigate("/");
@@ -79,7 +77,6 @@ const AvatarMenu = () => {
     if (!user) return;
     if (user.photoURL) setUserPhotoUrl(user.photoURL);
     else {
-      console.log("setting a random user photoURL");
       setRandomImage();
     }
   }, [user]);

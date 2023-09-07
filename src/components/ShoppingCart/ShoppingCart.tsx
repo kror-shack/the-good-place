@@ -62,6 +62,7 @@ const ShoppingCart = () => {
     return price * quantity;
   }
 
+  useEffect(() => {}, []);
   useEffect(() => {
     setTotalPrice(calculateTotalPrice(cart));
   }, [cart]);
@@ -127,6 +128,10 @@ const ShoppingCart = () => {
         variant="outlined"
         onClick={() => handleEmptyCart()}
         disabled={cartItems.length === 0 ? true : false}
+        sx={{
+          color: "rgba(4, 120, 87, 0.9098039216)",
+          borderColor: "rgba(4, 120, 87, 0.9098039216)",
+        }}
       >
         Empty Cart
       </Button>

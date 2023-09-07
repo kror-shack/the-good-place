@@ -103,3 +103,10 @@ code {
     url("./assets/fonts/CrimsonText-Bold.ttf") format("truetype");
   font-weight: bold;
 }
+
+@font-face {
+  font-family: "Crimson-bold";
+  src: local("Crimson-bold"),
+    url("./assets/fonts/CrimsonText-Bold.ttf") format("truetype");
+  font-weight: bold;
+}

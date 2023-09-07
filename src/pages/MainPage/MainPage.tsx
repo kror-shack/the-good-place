@@ -33,6 +33,10 @@ const styles = {
       fontSize: "1.3rem",
     },
 
+    "@media (min-width: 701px)": {
+      fontSize: "1.2rem",
+    },
+
     "@media (max-width: 500px)": {
       fontSize: "0.9rem",
       marginBottom: "2rem",
@@ -51,7 +55,7 @@ const MainPage = () => {
   };
   return (
     <Box className="Main-page">
-      <Link to="/bookTable" className="book-table-link">
+      <Link to="/bookTablePage" className="book-table-link">
         BOOK YOUR TABLE
       </Link>
       <Grid
@@ -68,10 +72,10 @@ const MainPage = () => {
             Where <span>Taste</span> Meets <span>Experience</span>
           </Typography>
           <Typography variant="subtitle2" className="sub-header">
-            Culinary Artistry Redefined, A Symphony of Taste and Refinement,
-            Embark on a Culinary Adventure Like No Other.
+            Culinary artistry redefined, a symphony of taste and refinement,
+            embark on a culinary adventure like no other.
           </Typography>
-          <Link to="/">Menu</Link>
+          <Link to="/MenuPage">Menu</Link>
         </Grid>
         <Grid xs={12} sm={6} className="image-container">
           <img
@@ -158,11 +162,11 @@ const MainPage = () => {
           </div>
         </Grid>
 
-        <Grid xs={12} sm={8}>
+        <Grid xs={12} sm={8} mt={4}>
           <Box sx={{ paddingLeft: "16px" }}>
             <Typography
-              component="h1"
-              variant="h2"
+              component="h2"
+              variant="h4"
               align="center"
               color="text.primary"
               gutterBottom
@@ -176,6 +180,7 @@ const MainPage = () => {
             spacing={2}
             className="services-container"
             columns={12}
+            mt={4}
             sx={{ justifyContent: "space-evenly" }}
           >
             <Grid xs={6} sm={3}>

@@ -1,5 +1,6 @@
 .Main-page {
   margin-top: 7.5rem;
+  padding: 0rem 1rem;
 
   .first-grid-item {
     background: #f9f9fa;
@@ -23,16 +24,16 @@
       letter-spacing: 0.16188rem;
     }
     .sub-header {
-      color: #222;
+      color: #444;
       text-align: center;
       font-family: "Poppins";
       font-size: 1.2rem;
       font-style: normal;
-      font-weight: 300;
+      font-weight: 100;
       line-height: normal;
     }
     h2 {
-      color: #000;
+      color: #222;
       text-align: center;
       font-family: "Poppins";
       font-size: 2.2rem;
@@ -43,7 +44,7 @@
 
       & > span {
         font-family: "Poppins-bold";
-        color: #000;
+        color: #222;
         font-size: 2.2rem;
         // font-style: italic;
         font-weight: 300;
@@ -75,7 +76,7 @@
 
       &:hover {
         color: white;
-        background-color: #5d5289;
+        background-color: rgba(4, 120, 87, 0.9098039216);
         border: 1px solid white;
       }
     }
@@ -388,7 +389,7 @@
 
     &:hover {
       color: white;
-      background-color: #5d5289;
+      background-color: rgba(4, 120, 87, 0.9098039216);
       border: 1px solid white;
     }
   }
@@ -413,7 +414,7 @@
 
       &:hover {
         color: white;
-        background-color: #5d5289;
+        background-color: rgba(4, 120, 87, 0.9098039216);
         border: 1px solid white;
       }
     }
@@ -433,9 +434,9 @@
         letter-spacing: 0;
       }
       .sub-header {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         padding: 0rem 1rem;
-        color: #333;
+        font-family: "Inter", sans-serif;
       }
       h2 {
         font-size: 1.4rem;
@@ -449,8 +450,11 @@
       }
 
       h6 {
+        font-family: "Inter", sans-serif;
+
         font-size: 0.9rem;
         letter-spacing: 0;
+        color: #444;
       }
       a {
         width: 5.25rem;
