@@ -35,12 +35,10 @@ const userSlice = createSlice({
   reducers: {
     changeUserName: (state: User, action: { payload: string }) => {
       state.displayName = action.payload;
-      console.log("changed usernmae");
     },
 
     updateFirstName: (state: User, action: { payload: string }) => {
       state.firstName = action.payload;
-      console.log(state.firstName);
     },
     updateLastName: (state: User, action: { payload: string }) => {
       state.lastName = action.payload;
@@ -72,8 +70,6 @@ const userSlice = createSlice({
     },
 
     loginUserWithEmail: (state: Partial<User>, action: { payload: User }) => {
-      console.log("succeeded");
-      console.log(action);
       state.email = action.payload.email;
       state.isAuthenticated = true;
       state.displayName = action.payload.displayName;
@@ -83,8 +79,6 @@ const userSlice = createSlice({
     },
 
     loginUser: (state: User, action: { payload: User }) => {
-      console.log("succeeded");
-      console.log(action);
       state.displayName = action.payload.displayName;
       state.email = action.payload.email;
       state.isAuthenticated = true;
@@ -92,7 +86,6 @@ const userSlice = createSlice({
       state.uid = action.payload.uid;
     },
     logoutUser: (state: User) => {
-      console.log("logginf out user");
       state.displayName = null;
       state.email = null;
       state.photoURL = null;

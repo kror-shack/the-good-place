@@ -68,7 +68,6 @@ const ProfilePage = () => {
 
   async function updateUserCredentials() {
     if (!initialUserData) return;
-    console.log("updating user credentials");
     const updatedFeilds = findUpdatedFields(initialUserData, formState);
     if (
       updatedFeilds.firstName ||
@@ -108,7 +107,6 @@ const ProfilePage = () => {
       updateUserCredentials(),
       updateUserProfile(updatedFeilds, user.uid),
     ]);
-    console.log("updatedddddddddd");
   };
 
   async function getInitalUserData() {
@@ -262,123 +260,3 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
-
-// import { useEffect, useState } from "react";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../../store/store";
-// import { AddressData } from "../../types/types";
-// import { fetchUserAddress } from "../../utils/services/fetchUserAddress";
-// import { fetchUserPhoneNumber } from "../../utils/services/fetchUserPhoneNumber";
-// import { useUpdateProfile } from "react-firebase-hooks/auth";
-// import "./ProfilePage.scss";
-// import app, { auth } from "../../firebase";
-// import Button from "@mui/material/Button";
-
-// const ProfilePage = () => {
-//   const user = useSelector((state: RootState) => state.rootReducer.user);
-//   const [updateProfile, updating, error] = useUpdateProfile(auth);
-//   const [name, setName] = useState(user.displayName);
-//   const [phoneNumber, setPhoneNumber] = useState<number>();
-//   const [editName, setEditName] = useState(false);
-//   const [editEmail, setEditEmail] = useState(false);
-//   const [editPhone, setEditPhone] = useState(false);
-//   const [editAddress, setEditAddress] = useState(false);
-
-//   const [address, setAddress] = useState<Partial<AddressData>>({
-//     street: "",
-//     city: "",
-//     building: "",
-//     district: "",
-//   });
-//   async function getUserAddress() {
-//     const address = await fetchUserAddress(user.uid);
-//     console.log(address[0]);
-//     setAddress(address[0]);
-//   }
-
-//   async function getUserNumber() {
-//     const number = await fetchUserPhoneNumber(user.uid);
-//     console.log(number);
-//     if (!number) return;
-//     setPhoneNumber(number[0]);
-//   }
-
-//   async function handleSaveName() {
-//     await updateProfile(name);
-//     console.log("handled the update");
-//     if (error) console.log(error);
-//     setEditName(false);
-//   }
-//   useEffect(() => {
-//     getUserAddress();
-//     getUserNumber();
-//   }, []);
-
-//   useEffect(() => {}, []);
-//   return (
-//     <main className="Profile-page">
-//       <Button variant="contained">Hello World</Button>
-//       <main>
-//         <label>Name:</label>
-//         {editName ? (
-//           <>
-//             <input
-//               type="text"
-//               value={name}
-//               onChange={(e) => setName(e.target.value)}
-//             />
-//             <button onClick={handleSaveName}>Save</button>
-//           </>
-//         ) : (
-//           <>
-//             <span>{name}</span>
-//             <button onClick={() => setEditName(true)}>Edit</button>
-//           </>
-//         )}
-//       </main>
-//       <p>{user.email}</p>
-//       <img src={user.photoURL} alt="" />
-//       <form>
-//         <main>
-//           <label>Building: </label>
-//           <input
-//             type="text"
-//             name="postalCode"
-//             value={address.building}
-//             // onChange={handleChange}
-//           />
-//         </main>
-//         <main>
-//           <label>Street:</label>
-//           <input
-//             type="text"
-//             name="street"
-//             value={address.street}
-//             // onChange={handleChange}
-//           />
-//         </main>
-//         <main>
-//           <label>City:</label>
-//           <input
-//             type="text"
-//             name="city"
-//             value={address.city}
-//             // onChange={handleChange}
-//           />
-//         </main>
-//         <main>
-//           <label>Phone Number: </label>
-//           <input
-//             type="text"
-//             name="postalCode"
-//             value={phoneNumber}
-//             // onChange={handleChange}
-//           />
-//         </main>
-//       </form>
-//     </main>
-//   );
-//   return <main></main>;
-// };
-
-// export default ProfilePage;

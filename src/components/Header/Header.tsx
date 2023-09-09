@@ -107,7 +107,6 @@ const styles = {
 const Header = ({ showSidebar, setShowSidebar }: Props) => {
   const navigate = useNavigate();
   function openSidebar() {
-    console.log("opening the side bar");
     setShowSidebar((prev) => !prev);
   }
   const user: User = useSelector((state: RootState) => state.rootReducer.user);

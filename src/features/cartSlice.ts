@@ -32,9 +32,7 @@ const cartSlice = createSlice({
       state.items = [];
     },
     addToCart: (state: CartState, action: Action) => {
-      console.log(action);
       const newItem = action.payload;
-      console.log(newItem);
       const existingItem = state.items.find(
         (item) => item.name === newItem.name
       );

@@ -160,7 +160,6 @@ const OrderDashboard = () => {
   }
 
   function addProductToCart(product: CartItem) {
-    console.log(cart);
     if (!user.isAuthenticated) {
       setShowAlert(true);
       return;
@@ -192,7 +191,6 @@ const OrderDashboard = () => {
   }, [activeTab]);
 
   useEffect(() => {
-    console.log("running use effect");
     const totalItems = calculateTotalCartItems(cart);
     setItems(totalItems);
   }, [addProductToCart]);
@@ -211,9 +209,7 @@ const OrderDashboard = () => {
             <div className="cart-container">
               <IconButton
                 onClick={() => {
-                  console.log("gonna navigate");
                   navigate("/checkoutpage");
-                  console.log("navigated");
                 }}
                 color="inherit"
               >

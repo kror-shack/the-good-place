@@ -40,7 +40,6 @@ const AddressDetails = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log("handling change");
     setFormState((prevFormState) => ({
       ...prevFormState,
       [name]: value,
@@ -86,8 +85,6 @@ const AddressDetails = () => {
   }
   function updateUser() {
     if (formState.firstName && formState.firstName !== "") {
-      console.log(formState.firstName);
-      console.log("dispatching for the firstName");
       dispatch(updateFirstName(formState.firstName));
     }
     if (formState.lastName) dispatch(updateLastName(formState.lastName));

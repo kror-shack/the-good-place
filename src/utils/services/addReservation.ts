@@ -27,7 +27,6 @@ export async function addReservation(
   };
   try {
     await addDoc(reservationsRef, doc);
-    console.log("added");
     return true;
   } catch (error) {
     console.error("Error sending message:", error);

@@ -16,7 +16,6 @@ export async function addReview(
   photoURL: string | null
 ) {
   const firestore = getFirestore(app);
-  console.log("adding review");
   const reservationsRef = await collection(firestore, "reviews");
   const doc = {
     author: name,
@@ -29,7 +28,6 @@ export async function addReview(
   };
   try {
     await addDoc(reservationsRef, doc);
-    console.log("added");
     window.location.reload();
   } catch (error) {
     console.error("Error sending message:", error);

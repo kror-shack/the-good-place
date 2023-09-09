@@ -26,7 +26,6 @@ export async function fetchUserPhoneNumber(uid?: string, isAdmin?: boolean) {
     const snapshot = await getDocs(q);
 
     snapshot.docs.forEach((doc) => {
-      console.log(`this is the doc data: ${doc.data().phoneNumber}`);
       reservationList.push(doc.data().phoneNumber);
     });
   } catch (err) {

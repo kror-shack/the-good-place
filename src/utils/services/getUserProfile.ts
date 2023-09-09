@@ -22,7 +22,6 @@ export default async function getUserProfile(
   userName: string,
   userUid: string
 ) {
-  console.log(userUid);
   const nameParts = userName.split(" ");
   const firstName = nameParts[0];
   const lastName = nameParts.slice(1).join(" ");
@@ -31,7 +30,6 @@ export default async function getUserProfile(
   const q = query(usersRef, where("uid", "==", userUid));
   try {
     const snapshot = await getDocs(q);
-    console.log(snapshot);
     const userData = snapshot.docs[0].data() as UserProfile;
     const updatedUserProfile: UserProfile = {
       ...userData,

@@ -43,15 +43,11 @@ interface CartItem {
 const steps = ["Shopping Cart", "Shipping address", "Review your order"];
 
 export default function Checkout() {
-  console.log("11111");
   const user = useSelector((state: RootState) => state.rootReducer.user);
-  console.log("222222");
 
   const cart = useSelector((state: RootState) => state.rootReducer.cart);
-  console.log("33333");
 
   const cartItems: CartItem[] = cart.items;
-  console.log("44444");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -66,9 +62,7 @@ export default function Checkout() {
     setActiveStep(activeStep - 1);
   };
 
-  useEffect(() => {
-    console.log("in the checkout page");
-  }, []);
+  useEffect(() => {}, []);
 
   function getStepContent(step: number) {
     switch (step) {

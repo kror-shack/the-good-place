@@ -16,8 +16,6 @@ export async function checkIfUserIsAdmin(uid: string) {
   try {
     const docsJson = await getDocs(q);
 
-    console.log("there are the json docs");
-    console.log(docsJson);
     if (docsJson.docs.length > 0) {
       return true;
     }

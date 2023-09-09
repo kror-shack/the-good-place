@@ -29,6 +29,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import { FormControl } from "@mui/material";
 import {
   Dialog,
   DialogActions,
@@ -231,7 +232,7 @@ const SignInPage = () => {
           >
             <TextField
               margin="normal"
-              required
+              required={true}
               fullWidth
               id="email"
               label="Email Address"
@@ -241,9 +242,10 @@ const SignInPage = () => {
               value={formState.email}
               autoFocus
             />
+
             <TextField
               margin="normal"
-              required
+              required={true}
               fullWidth
               name="password"
               label="Password"
