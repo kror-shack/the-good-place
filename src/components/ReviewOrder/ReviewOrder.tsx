@@ -26,14 +26,27 @@ export default function ReviewOrder() {
   const user = useSelector((state: RootState) => state.rootReducer.user);
   const name = user.firstName + " " + user.lastName;
   const phoneNumber = user.phoneNumber;
-  const address =
-    user.address.addressLineOne +
-    " " +
-    user.address.addressLineTwo +
-    " " +
-    user.address.city +
-    " " +
-    user.address.district;
+  const addressParts = [];
+
+  if (user.address) {
+    if (user.address.addressLineOne) {
+      addressParts.push(user.address.addressLineOne);
+    }
+
+    if (user.address.addressLineTwo) {
+      addressParts.push(user.address.addressLineTwo);
+    }
+
+    if (user.address.city) {
+      addressParts.push(user.address.city);
+    }
+
+    if (user.address.district) {
+      addressParts.push(user.address.district);
+    }
+  }
+
+  const address = addressParts.join(" ");
 
   const [totalPrice, setTotalPrice] = useState(calculateTotalPrice(cart));
   const cartItems: CartItem[] = cart.items;
