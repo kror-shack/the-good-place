@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignInPage from "./pages/SignInPage/SignInPage";
@@ -20,6 +20,7 @@ import ProtectedRoute from "./utils/auth/protectedRoute";
 import { PersistGate } from "redux-persist/integration/react";
 function App() {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
+  const [firstRender, setFirstRender] = useState(true);
 
   return (
     <Provider store={store}>
@@ -27,7 +28,15 @@ function App() {
         <BrowserRouter>
           <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
           <Routes>
-            <Route path="/" element={<MainPage />} />
+            <Route
+              path="/"
+              element={
+                <MainPage
+                  firstRender={firstRender}
+                  setFirstRender={setFirstRender}
+                />
+              }
+            />
             <Route path="/SignInPage" element={<SignInPage />} />
             <Route path="/SignUpPage" element={<SignUpPage />} />
             <Route path="/bookTablePage" element={<BookTablePage />} />

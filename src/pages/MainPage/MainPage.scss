@@ -314,7 +314,6 @@
   }
 
   .services-container {
-    padding: 0rem 0rem 0rem 5rem;
     // display: flex;
     // flex-direction: column;
     // width: 100%;
@@ -398,6 +397,16 @@
 @media screen and (min-width: 800px) {
   html {
     font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .Main-page {
+    .news-letter-container {
+      h3 {
+        text-align: center;
+      }
+    }
   }
 }
 
@@ -549,6 +558,7 @@
         font-size: 1rem;
       }
     }
+
     .service-header {
       font-size: 0.9rem;
     }
@@ -556,8 +566,6 @@
       // display: grid;
       // width: 100%;
       // grid-template-columns: repeat(4, 1fr);
-
-      padding: 0rem 2rem;
 
       .align-right {
         text-align: right;
