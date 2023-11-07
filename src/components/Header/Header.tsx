@@ -46,9 +46,9 @@ const styles = {
 
     "@media (min-width: 700px)": {
       "&>svg": {
-        height: "3.5rem",
-        width: "3rem",
-      }, // Example: reduce font size on screens up to 600px wide
+        height: "2.5rem",
+        width: "2rem",
+      },
     },
 
     "@media (max-width: 500px)": {
@@ -87,19 +87,19 @@ const styles = {
     },
   },
 
-  ///2TEyIyXiS69dKd0BL6No8vqC4iZ_7d5D28hzn71tvtNUgx16q
   header: {
     fontFamily: "Josefin-sans",
     display: "flex",
     alignItems: "center",
     gap: "5px",
+    fontSize: "1.6rem",
 
     "@media (max-width: 700px)": {
-      fontSize: "1.3rem", // Example: reduce font size on screens up to 600px wide
+      fontSize: "1.3rem",
     },
 
     "@media (max-width: 500px)": {
-      fontSize: "1.3rem", // Example: reduce font size on screens up to 600px wide
+      fontSize: "1.3rem",
     },
   },
 };
@@ -148,27 +148,3 @@ const Header = ({ showSidebar, setShowSidebar }: Props) => {
 };
 
 export default Header;
-
-//   return (
-//     <header>
-//       <HamburgerMenu
-//         showSidebar={showSidebar}
-//         setShowSidebar={setShowSidebar}
-//       />
-//       <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
-
-//       <MainLogo />
-//       <div className="header-right">
-//         {user && user.email ? (
-//           <AvatarMenu />
-//         ) : (
-//           <Link to="/SignInPage" className="login-button">
-//             Login
-//           </Link>
-//         )}
-//       </div>
-//     </header>
-//   );
-// };
-
-// export default Header;

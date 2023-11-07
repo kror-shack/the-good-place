@@ -44,7 +44,7 @@ const defaultTheme = createTheme();
 
 const styles = {
   main: {
-    marginTop: "10rem",
+    marginTop: "6.5rem",
     display: "flex",
     justifyContent: "center",
 

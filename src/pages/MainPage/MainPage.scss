@@ -1,5 +1,5 @@
 .Main-page {
-  margin-top: 7.5rem;
+  margin-top: 6rem;
   padding: 0rem 1rem;
 
   .first-grid-item {
@@ -339,10 +339,9 @@
     }
     p {
       color: rgba(51, 13, 25, 0.89);
-      font-family: "Poppins-bold";
-      font-size: 1.2rem;
+      font-family: "Poppins";
+      font-size: 1rem;
       font-style: normal;
-      font-weight: 500;
       line-height: normal;
 
       .service-description {
@@ -351,16 +350,16 @@
     }
 
     svg {
-      height: 7rem;
-      width: 6rem;
+      height: 4rem;
+      width: 3rem;
 
       rect {
-        height: 6rem;
-        width: 6rem;
+        height: 4rem;
+        width: 3rem;
 
         image {
-          height: 5rem;
-          width: 5rem;
+          height: 4rem;
+          width: 3rem;
         }
       }
     }
@@ -604,17 +603,3 @@
     }
   }
 }
-// @media screen and (max-width: 750px) {
-// }
-
-// @media screen and (max-width: 600px) {
-//   html {
-//     font-size: 10px;
-//   }
-// }
-
-// @media screen and (max-width: 400px) {
-//   html {
-//     font-size: 8px;
-//   }
-// }

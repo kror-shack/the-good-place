@@ -106,7 +106,7 @@ export default function Checkout() {
         elevation={0}
         sx={{
           position: "relative",
-          marginTop: "9rem",
+          marginTop: "6.5rem",
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       ></AppBar>

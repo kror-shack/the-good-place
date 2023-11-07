@@ -29,7 +29,7 @@ import "./SignUpPage.scss";
 
 const styles = {
   main: {
-    marginTop: "9rem",
+    marginTop: "6.5rem",
     display: "flex",
     justifyContent: "center",
 

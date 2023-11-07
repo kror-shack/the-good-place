@@ -30,13 +30,14 @@ const styles = {
     display: "flex",
     alignItems: "center",
     gap: "5px",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     color: "#047857e8",
     fontWeight: 900,
     letterSpacing: "2px",
 
     "@media (max-width: 700px)": {
       fontSize: "1.3rem",
+      justifyContent: "flex-start",
     },
 
     "@media (max-width: 500px)": {
@@ -93,7 +94,7 @@ export default function DisplayReviews() {
           <Container maxWidth="sm">
             <Typography
               component="h1"
-              variant="h2"
+              variant="h3"
               align="center"
               color="text.primary"
               gutterBottom
@@ -102,7 +103,7 @@ export default function DisplayReviews() {
               TESTIMONIALS
             </Typography>
             <Typography
-              variant="h5"
+              variant="h6"
               align="center"
               color="text.secondary"
               paragraph
@@ -111,7 +112,7 @@ export default function DisplayReviews() {
               What Our Visitors Say
             </Typography>
             <Typography
-              variant="h5"
+              variant="h6"
               align="center"
               color="text"
               paragraph

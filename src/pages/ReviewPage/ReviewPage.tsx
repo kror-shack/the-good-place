@@ -36,10 +36,10 @@ import "./ReviewPage.scss";
 
 const styles = {
   main: {
-    marginTop: "15rem",
+    marginTop: "6.5rem",
 
     "@media screen and (max-width: 500px)": {
-      marginTop: "2rem",
+      marginTop: "5rem",
     },
   },
   header: {
@@ -95,13 +95,7 @@ export default function ReviewPage() {
       <CssBaseline />
 
       <main className="Review-page">
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-          }}
-        >
+        <Box sx={styles.main}>
           <Snackbar
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
             open={error}

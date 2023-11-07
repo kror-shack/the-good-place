@@ -83,7 +83,12 @@ const MainPage = ({ firstRender, setFirstRender }: Props) => {
     <>
       {isLoading && (
         <Box className="Main-page">
-          <Skeleton animation="wave" height="5rem" width="15rem" />
+          <Skeleton
+            sx={{ marginTop: 0 }}
+            animation="wave"
+            height="4rem"
+            width="15rem"
+          />
           <Grid container spacing={2} sx={{ height: "80vh" }}>
             <Grid xs={12} md={6}>
               <Skeleton
@@ -214,7 +219,7 @@ const MainPage = ({ firstRender, setFirstRender }: Props) => {
           <Grid xs={12}>
             <div className="news-letter-container">
               <div>
-                <Typography variant="h3">
+                <Typography variant="h4">
                   Sign Up For THE GOOD PLACE Newsletter
                 </Typography>
                 <Typography variant="body1">
@@ -252,10 +257,10 @@ const MainPage = ({ firstRender, setFirstRender }: Props) => {
             </Box>
             <Grid
               container
-              spacing={4}
+              spacing={6}
               className="services-container"
               columns={12}
-              mx={4}
+              mx={0}
               sx={{ justifyContent: "space-evenly" }}
             >
               <Grid xs={6} lg={3}>

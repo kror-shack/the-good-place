@@ -103,30 +103,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
           </ListItemIcon>
           <ListItemText primary="Order" />
         </ListItem>
-        <ListItem
-          sx={styles.listItem}
-          button
-          component={Link}
-          to="/"
-          onClick={closeSidebar}
-        >
-          <ListItemIcon>
-            <InfoIcon />
-          </ListItemIcon>
-          <ListItemText primary="About" />
-        </ListItem>
-        <ListItem
-          sx={styles.listItem}
-          button
-          component={Link}
-          to="/"
-          onClick={closeSidebar}
-        >
-          <ListItemIcon>
-            <EventIcon />
-          </ListItemIcon>
-          <ListItemText primary="Events" />
-        </ListItem>
+
         <ListItem
           sx={styles.listItem}
           button
