@@ -50,20 +50,20 @@ const styles = {
     justifyContent: "center",
 
     "@media (max-width: 700px)": {
-      fontSize: "1.3rem", // Example: reduce font size on screens up to 600px wide
+      fontSize: "1.3rem",
     },
 
     "@media (max-width: 500px)": {
-      fontSize: "1.4rem", // Example: reduce font size on screens up to 600px wide
+      fontSize: "1.4rem",
     },
   },
   h5: {
     "@media (max-width: 700px)": {
-      fontSize: "1.1rem", // Example: reduce font size on screens up to 600px wide
+      fontSize: "1.1rem",
     },
 
     "@media (max-width: 500px)": {
-      fontSize: "1.1rem", // Example: reduce font size on screens up to 600px wide
+      fontSize: "1.1rem",
     },
   },
 };

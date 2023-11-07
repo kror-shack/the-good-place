@@ -29,9 +29,6 @@ import Typography from "@mui/material/Typography";
 import ReviewOrder from "../../components/ReviewOrder/ReviewOrder";
 import { createTheme } from "@mui/system";
 import { ThemeProvider } from "@emotion/react";
-// import AddressForm from "./AddressForm";
-// import PaymentForm from "./PaymentForm";
-// import Review from "./Review";
 
 interface CartItem {
   id: string;
